@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,25 +28,6 @@
             margin-right: 30px;
             position:relative ; right: 200px;
         }
-
-        
-
-        .content-image {
-            max-width: 50%;
-            padding: 20px;
-        }
-
-        .content-image img {
-            max-width: 100%;
-            border-radius: 10px;
-        }
-        .view-more {
-            color: black !important;
-            text-decoration: none; /* Menghapus garis bawah bawaan dari teks */
-            border-bottom: 1px solid black; /* Properti untuk garis bawah */
-            padding-bottom: 5px; /* Mengatur jarak vertikal dari bawah teks */
-        }
-        
         
 
         .col-md-6 img {
@@ -72,15 +53,6 @@
 
 
         }
-        .background-container {
-            background-image: url('https://i.pinimg.com/564x/9b/7b/79/9b7b794ebd0ac4b1003e5d1bd1fd304b.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            color: #000000; /* Warna teks pada latar belakang gelap */
-            padding: 100px 0; /* Sesuaikan sesuai kebutuhan Anda */
-            text-align: center;
-        }
 
         .background-container h1 {
             font-size: 60px;
@@ -92,51 +64,11 @@
             font-size: 18px;
         }
 
-        .instagram {
-            background-color: #FAF4F4;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-family: 'Outfit', sans-serif;
-            display: inline-block;
-            /* Mengatur lebar tombol */
-            width: 200px; /* Ganti nilai ini sesuai dengan lebar yang Anda inginkan */
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.6);
-        }
-        
-        .instagram a {
-            color: #000000; 
-        }
-        
-        .menu {
-            display: flex; /* Menggunakan flexbox untuk tata letak horizontal */
-        }
-        
-        .menu a {
-            margin-right: 90px; /* Mengatur jarak antara setiap elemen menu */
-            position: relative; bottom: 140px; left: 319px;
-            font-weight: bold;
-            font-family: 'Outfit';
-            font-size: large;
-            color: #000000; 
-        }
-
-        .menu h4 {
-            margin-right: 90px; /* Mengatur jarak antara setiap elemen menu */
-            position: relative; bottom: 240px; left: 450px;
-            font-weight: bold;
-            font-family: 'Outfit';
-            font-size: large;
-        }
         .footer1-container{
             margin-top:10%;
             height: auto;
         }
         
-        /* Gaya untuk pembatas */
-.footer1-container hr {
-    border: 1px solid #ddd; /* Warna dan gaya garis pembatas */
-    margin-top: 20px; /* Jarak di atas garis pembatas */
-}
 
 
 .background-container {
@@ -171,9 +103,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/service') }}">Service</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://wa.me/6288744891217">Contact</a>
-            </li>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -181,8 +110,10 @@
             </li>
         </ul>
     </div>
-</nav>
-
+</nav> --}}
+@extends('layouts.profile')
+@section('content')
+    
 <div class="background-container">
     <div class="container">
         <div class="row">
@@ -193,7 +124,7 @@
     </div>
 </div>
 <!-- Konten Utama -->
-<div class="container mt-5">
+<div class="container mt-1">
     <div class="row">
         <!-- Gambar -->
         <div class="col-md-6">
@@ -202,16 +133,24 @@
         <!-- Deskripsi -->
         <div class="col-md-3">
             <h4>Isi Data Anda</h4>
-            <p>Nama Lengkap <input type="text" placeholder="Masukkan Nama Lengkap" style="border: 1px solid #ccc; border-radius: 5px;"></p> <!-- Menambahkan properti border dan border-radius -->
-            <p>Alamat: <br><textarea placeholder="Masukkan Alamat" rows="4" cols="25" style="border: 1px solid #ccc; border-radius: 5px;"></textarea></p> <!-- Menambahkan properti border dan border-radius -->
-            <p>Gmail: <input type="text" placeholder="Masukkan Gmail" style="border: 1px solid #ccc; border-radius: 5px;"></p> <!-- Menambahkan properti border dan border-radius -->
-            <a href="/profile" class="btn btn-secondary ml-2" style="color: white;">Ubah</a>
+            <form method="POST" action="{{ route('profile.update') }}">
+                @csrf
+                <!-- Nama -->
+                <p>Nama Lengkap <input type="text" name="name" value="{{ Auth::user()->name }}" placeholder="Masukkan Nama Lengkap" style="border: 1px solid #ccc; border-radius: 5px;"></p>
+                <!-- Email -->
+                <p>Gmail: <input type="email" name="email" value="{{ Auth::user()->email }}" placeholder="Masukkan Gmail" style="border: 1px solid #ccc; border-radius: 5px;"></p>
+                <!-- Password -->
+                <p>Password: <input type="password" name="password" placeholder="Masukkan Password Baru" style="border: 1px solid #ccc; border-radius: 5px;"></p>
+                <!-- Tombol Simpan -->
+                <button type="submit" class="btn btn-secondary ml-2" style="color: white;">Simpan</button>
+            </form>
         </div>
     </div>
 </div>
+@endsection
 
 
-<!-- Tambahkan kontainer baru di bawah konten utama -->
+{{-- <!-- Tambahkan kontainer baru di bawah konten utama -->
 
 
 
@@ -243,4 +182,4 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-</html>
+</html> --}}

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Middleware\AdminMiddleware;
+use App\Http\Controllers\JasaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,11 +26,14 @@ Route::put('/gallery/{id}', [App\Http\Controllers\HomeController::class, 'update
 Route::delete('/gallery/{id}', [App\Http\Controllers\HomeController::class, 'destroy'])->name('destroy');
 Route::get('/gallery/tampilkan/{id}', [App\Http\Controllers\HomeController::class, 'showImage'])->name('gallery.tampilkan');
 Route::get('/manage', [App\Http\Controllers\HomeController::class, 'manage'])->middleware('admin');
-Route::get('/service', [App\Http\Controllers\HomeController::class, 'service'])->name('service');
-Route::get('/pemesanan', [App\Http\Controllers\HomeController::class, 'pemesanan'])->name('pemesanan');
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+Route::get('/service', [App\Http\Controllers\JasaController::class, 'service'])->name('service');
+Route::get('/pemesanan/{id}', [App\Http\Controllers\JasaController::class, 'pemesanan'])->name('pemesanan');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
+Route::get('/editprofile', [App\Http\Controllers\ProfileController::class, 'editprofile'])->name('editprofile');
+Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'updateProfile'])->name('profile.update');
+Route::get('/homemanage', [App\Http\Controllers\HomeController::class, 'homemanage'])->middleware('admin');
+Route::resource('servis', JasaController::class);
 
-Route::get('/editprofile', [App\Http\Controllers\HomeController::class, 'editprofile'])->name('editprofile');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

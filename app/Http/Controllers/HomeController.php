@@ -12,26 +12,10 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function service()
-    {
-        return view('servis.service');
+    public function homemanage(){
+        return view('home.homemanage',);
     }
 
-    public function pemesanan()
-    {
-        return view('servis.pemesanan');
-    }
-
-    public function profile()
-    {
-        return view('profile.profile');
-    }
-
-    public function editprofile()
-    {
-        return view('profile.editprofile');
-    }
-    
     public function gallery()
     {
         $galleries = Gallery::all();

@@ -138,9 +138,4 @@ class JasaController extends Controller
         return view('servis.service', compact('jasas'));  
     }
 
-    public function pemesanan($id)
-    {
-        $jasa = Jasa::findOrFail($id);
-        return view('servis.pemesanan', compact('jasa'));
-    }
 }

@@ -23,8 +23,16 @@
         padding: 0 20px; /* Beri padding untuk memberi jarak antara elemen */
     }
 
-    input[type="text"],
     input[type="date"],
+    input[type="time"],
+    textarea  {
+        width: calc(50% - 22px); /* Agar input memenuhi lebar container */
+        margin-bottom: 10px; /* Beri jarak antar input */
+        padding: 5px; /* Beri padding untuk tampilan yang lebih baik */
+        box-sizing: border-box; /* Agar padding tidak menambah lebar input */
+    }
+
+    input[type="text"],
     textarea {
         width: calc(100% - 22px); /* Agar input memenuhi lebar container */
         margin-bottom: 10px; /* Beri jarak antar input */
@@ -57,29 +65,18 @@
         border-radius: 5px;
     }
 
-    button[type="submit"] {
-        width: 20%;
-        padding: 10px;
-        background-color: #007bff; /* Warna tombol biru */
-        color: #fff; /* Warna teks putih */
-        border: none;
-        cursor: pointer;
-    }
-
-    button[type="submit"]:hover {
-        background-color: #0056b3; /* Warna tombol biru lebih gelap saat dihover */
-    }
-
-    .btn-secondary {
-        background-color: #6c757d; /* Warna tombol abu-abu */
-    }
-
-    .btn-secondary:hover {
-        background-color: #545b62; /* Warna tombol abu-abu lebih gelap saat dihover */
-    }
 </style>
-<div class="container2" style="margin-top:50px">
-    <form action="/pemesanan" method="POST" class="row">
+<div class="background-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Check Out</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container2" style="margin-top:70px">
+    <form action="/checkout" method="POST" class="row">
         @csrf
         <!-- Gambar -->
         <div class="col-md-6">
@@ -88,22 +85,27 @@
         <!-- Deskripsi -->
         <div class="col-md-3">
             <h4>{{ $jasa->nama }}</h4>
+            <input type="hidden" name="nama_jasa" value="{{ $jasa->nama }}">
             <p>Harga: Rp. {{ number_format($jasa->harga, 0, ',', '.') }}</p>
             <p>Tanggal: <br>
-                <input type="date" name="tanggal" required>
+                <input type="date" name="date" id="date" required>
+            </p>
+            <p>Waktu : <br>
+            <input type="time" id="time" name="time" required>
             </p>
             <p>Jumlah Pemesanan:</p>
             <div class="jumlah-container">
                 <button type="button" onclick="kurangiJumlah()">-</button>
-                <input type="text" name="jumlah" id="jumlahPemesanan" value="1" readonly>
+                <input type="number" name="qty" id="qty" value="1" readonly>
                 <button type="button" onclick="tambahJumlah()">+</button>
             </div>
             <p>Total Harga: <span id="totalHarga">Rp. {{ number_format($jasa->harga, 0, ',', '.') }}</span></p>
-            <p>Nama Lengkap <input type="text" name="nama_lengkap" placeholder="Masukkan Nama Lengkap" required></p>
-            <p>Alamat: <br><textarea name="alamat" placeholder="Masukkan Alamat" rows="4" cols="25" required></textarea></p>
-            <p>Nomor Telepon: <input type="text" name="nomor_telepon" placeholder="Masukkan Nomor Telepon" required></p>
-            <button type="submit" class="btn btn-outline-secondary" id="simpanTransaksiButton">Pesan</button>
-            <a href="/service" class="btn btn-secondary ml-2" style="color: white;">Batal</a>
+            <input type="hidden" name="total_price" id="total_price" value="{{ $jasa->harga }}">
+            <p>Nama Lengkap <input type="text" name="name" placeholder="Masukkan Nama Lengkap" required></p>
+            <p>Alamat: <br><textarea name="address" placeholder="Masukkan Alamat" rows="4" cols="25" required></textarea></p>
+            <p>Nomor Telepon: <input type="text" name="phone" placeholder="Masukkan Nomor Telepon" required></p>
+            <button type="submit" class="btn btn-secondary ml-2" id="simpanTransaksiButton">Periksa</button>
+            <a href="/service" class="btn btn-outline-secondary" >Batal</a>
         </div>
     </form>
 </div>
@@ -115,17 +117,18 @@
         var totalHargaFormatted = formatRupiah(totalHarga);
         var totalHargaElement = document.getElementById('totalHarga');
         totalHargaElement.textContent = 'Rp. ' + totalHargaFormatted;
+        document.getElementById('total_price').value = totalHarga;
     }
 
     function tambahJumlah() {
-        var input = document.getElementById('jumlahPemesanan');
+        var input = document.getElementById('qty');
         var currentValue = parseInt(input.value, 10);
         input.value = currentValue + 1;
         updateTotalHarga(currentValue + 1);
     }
 
     function kurangiJumlah() {
-        var input = document.getElementById('jumlahPemesanan');
+        var input = document.getElementById('qty');
         var currentValue = parseInt(input.value, 10);
         if (currentValue > 1) {
             input.value = currentValue - 1;

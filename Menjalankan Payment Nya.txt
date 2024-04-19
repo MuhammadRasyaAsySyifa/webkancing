@@ -1,0 +1,16 @@
+pertama jalankan aplikasi seperti biasa
+terus buka ngrokn dengan seperti dibawah ini
+D:\>cd tugas
+
+D:\Tugas>php -S localhost:7000 -t rasya/public
+
+lalu jika sudah tidak ada masalah buka ngrok lagi
+lalu ketikkan
+ngrok http localhost:7000
+
+jika sudah, maka cari pada di bagian seperti Forwarding https://615b-140-213-10-35.ngrok-free.app -> http://localhost:7000 
+maka nanti ambil pada bagian https://615b-140-213-10-35.ngrok-free.app dan paste kan ke dalam
+website https://dashboard.sandbox.midtrans.com/settings/vtweb_configuration di bagian Payment Notifikasi URL
+dan klik update
+
+Selesai

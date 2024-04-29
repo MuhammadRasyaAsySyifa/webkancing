@@ -166,7 +166,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto" style="position: relative; left: 26%;">
                         <li class="nav-item">
-                            <p><a class="nav-link" href="{{ url('/home') }}">Home</a></p>
+                            <p><a class="nav-link" href="{{ url('/') }}">Home</a></p>
                         </li>
                         <li class="nav-item">
                             <p><a class="nav-link" href="{{ url('/gallery') }}">Gallery</a></p>

@@ -26,6 +26,10 @@
                         </form>
                         <p style="font-size: 18px;">Riwayat pemesanan</p> <!-- Menambahkan font-size di sini -->
                         <p style="font-size: 18px;">Kamu belum membuat pemesanan</p> <!-- Menambahkan font-size di sini -->
+                        <p style="font-size: 18px;">  
+                            @if (auth()->check() && auth()->user()->isAdmin())
+                                <a href="/adminmanage" class="btn btn-outline-secondary">Halaman Admin</a>
+                            @endif</p>
                     @else
                         <p style="font-size: 18px;">Silakan login untuk melihat profil Anda.</p>
                     @endauth

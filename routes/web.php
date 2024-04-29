@@ -15,9 +15,9 @@ use App\Http\Controllers\JasaController;
 |
 */
 
-Route::get('/', function () {
-    return view('home.welcome');
-});
+// Route::get('/', function () {
+//     return view('home.home');
+// });
 Route::get('/gallery', [App\Http\Controllers\HomeController::class, 'gallery'])->name('gallery');
 Route::get('/gallery/create', [App\Http\Controllers\HomeController::class, 'create'])->name('create');
 Route::post('/gallery', [App\Http\Controllers\HomeController::class, 'store'])->name('store');
@@ -35,7 +35,8 @@ Route::resource('servis', JasaController::class);
 Route::get('/pemesanan/{id}', [App\Http\Controllers\OrderController::class, 'pemesanan'])->name('pemesanan');
 Route::post('/checkout',[App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');
 Route::get('/invoice/{id}',[App\Http\Controllers\OrderController::class, 'invoice'])->name('invoice');
+Route::get('/adminmanage',[App\Http\Controllers\ProfileController::class, 'admin'])->name('admin');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

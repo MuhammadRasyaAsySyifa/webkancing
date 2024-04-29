@@ -2,12 +2,18 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Order;
 use App\Models\User;
 
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    public function admin()
+        {
+        $orders = Order::all();
+        return view('profile.adminmanage', compact('orders'));
+        }
     public function profile()
         {
             return view('profile.profile');

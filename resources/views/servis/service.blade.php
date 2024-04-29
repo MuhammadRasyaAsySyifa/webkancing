@@ -13,9 +13,9 @@
 
 <!-- Tambahkan kontainer baru di bawah konten utama -->
 <div class="container mt-5">
-    @if (auth()->check() && auth()->user()->isAdmin())
+    {{-- @if (auth()->check() && auth()->user()->isAdmin())
     <a href="/servis" class="btn btn-outline-secondary">Kelola Jasa</a>
-    @endif
+    @endif --}}
     <div class="row" style="position: relative; left:50px;">
         @foreach ($jasas as $jasa)
         <div class="col-md-5"  style="margin-bottom: 60px;">

@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 use App\Models\Gallery;
-
+use App\Models\Jasa;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $jasas = Jasa::all();
+        $jasa = Jasa::first();
+        $galleries = Gallery::all();
+        return view('home.home', compact('jasas','galleries','jasa'));
     }
 
     public function homemanage(){

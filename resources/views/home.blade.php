@@ -138,7 +138,7 @@ margin-top: 20px; /* Jarak di atas garis pembatas */
     <div class="container">
         <div class="row content">
             <div class="col-md-6 content-text">
-                <h1><span style="color: #616161;">Kancing</span> Production</h1>
+                <h1><span style="color: #616161;">Kancing</span> Production1</h1>
                 <p>Selamat datang di Kancing Production, sumber inspirasi terbaik untuk fotografer dan videografer. Studio kami menawarkan layanan dalam fotografi dan videografi. Dengan pengalaman dan keahlian kami, kami siap membantu Anda menciptakan hasil terbaik untuk proyek Anda. Terus kunjungi Kancing Production untuk inspirasi dan informasi terbaru dalam dunia fotografi dan videografi.</p>
             </div>
             <div class="col-md-6 content-image">

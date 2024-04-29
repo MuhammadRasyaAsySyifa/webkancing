@@ -344,16 +344,18 @@
 <div class="content-container">
     <div class="container">
         <div class="row content">
-            @if (auth()->check() && auth()->user()->isAdmin())
+            {{-- @if (auth()->check() && auth()->user()->isAdmin())
             <a href="/homemanage" class="btn btn-outline-secondary">Kelola Konten</a>
-        @endif
+        @endif --}}
             <div class="col-md-6 content-text">
                 <h1><span style="color: #616161;">Studio Foto</span><br> Kancing Production</h1>
-                <p>Selamat datang di Kancing Production, sumber inspirasi terbaik untuk fotografer dan videografer. Studio kami menawarkan layanan dalam fotografi dan videografi. Dengan pengalaman dan keahlian kami, kami siap membantu Anda menciptakan hasil terbaik untuk proyek Anda. Terus kunjungi Kancing Production untuk inspirasi dan informasi terbaru dalam dunia fotografi dan videografi.</p>
+                <p>Selamat datang di Kancing Production, Layanan terbaik untuk fotografer. Studio kami menawarkan layanan dalam fotografi. Dengan pengalaman dan keahlian kami, kami siap membantu Anda menciptakan hasil terbaik untuk Anda. Terus kunjungi Kancing Production untuk Layanan dan informasi untuk fotografi.</p>
             </div>
             <div class="col-md-6 content-image">
-                <img src="https://i.pinimg.com/564x/f9/60/25/f9602594b6e78819980cc9bddf7054c2.jpg" alt="Gambar Anda" id="gambar" class="img-fluid" style="border-radius: 35px;">
-            </div>
+                    @if($jasa)
+                        <img src="{{ asset('images/' . $jasa->gambar) }}" alt="Gambar Anda" id="gambar" class="img-fluid" style="border-radius: 35px;">
+                    @endif
+                </div>
         </div>
     </div>
 </div>
@@ -362,22 +364,17 @@
 <div class="container mt-5 text-center">
     <h1 class="display-4">Our Service</h1>
     <div class="row" style="position: relative; right:100px;">
-        <!-- Gambar pertama dengan teks formal -->
+        @foreach($jasas->slice(0, 2) as $jasa)
         <div class="col-md-6 mt-5">
-            <img src="https://i.pinimg.com/564x/79/34/71/79347187c66ac5fc7e375b71edb0d12f.jpg" alt="Gambar Group" class="img-fluid">
-            <h4>Foto Group</h4>
-            <p>Berfoto dengan <br> teman teman mu dengan seru!</p>
-            <a href="/service" class="view-more"  style="text-decoration:none;">View More</a>
+            <img src="{{ asset('images/' . $jasa->gambar) }}" alt="{{ $jasa->nama }}" class="img-fluid">
+            <h4>{{ $jasa->nama }}</h4>
+            <p>{{ $jasa->deskripsi }}</p>
+            <a href="/service" class="view-more" style="text-decoration:none;">View More</a>
         </div>
-        <!-- Gambar kedua dengan teks semi-formal -->
-        <div class="col-md-6 mt-5" >
-            <img src="https://i.pinimg.com/564x/88/0e/5d/880e5d932652cbb7c2e4e5efb1111491.jpg"  alt="Gambar Semi-Formal" class="img-fluid">
-            <h4>Foto Dengan Keluarga</h4>
-            <p>Ayo foto dengan keluarga<br> agar mendapat kenangan yang bagus!</p>
-            <a href="/service" class="view-more" style="text-decoration:none;" >View More</a>
-        </div>
+        @endforeach
     </div>
 </div>
+
 <!-- Tambahkan kontainer baru dengan background image -->
 <div class="background-container">
     <div class="container">

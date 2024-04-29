@@ -13,9 +13,9 @@
     <!-- Gallery -->
     <div class="container mt-5">
         <div class="row" >
-            @if (auth()->check() && auth()->user()->isAdmin())
+            {{-- @if (auth()->check() && auth()->user()->isAdmin())
     <a href="/manage" class="btn btn-outline-secondary">Kelola Gambar</a>
-@endif
+@endif --}}
             @foreach($galleries as $gambar)
             <div class="col-md-4 mb-3" >
                 <div class="card" style="border-radius: 15px; overflow: hidden;">

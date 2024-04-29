@@ -288,7 +288,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto" style="position: relative; left: 26%;">
                         <li class="nav-item">
-                            <p><a class="nav-link" href="{{ url('/home') }}">Home</a></p>
+                            <p><a class="nav-link" href="{{ url('/') }}">Home</a></p>
                         </li>
                         <li class="nav-item">
                             <p><a class="nav-link" href="{{ url('/gallery') }}">Gallery</a></p>
@@ -362,7 +362,7 @@
         </footer>
         
     </div>
-    <script>
+    {{-- <script>
         let gambar = document.getElementById('gambar');
         let gambarArray = ['https://i.pinimg.com/564x/f9/60/25/f9602594b6e78819980cc9bddf7054c2.jpg', 'https://i.pinimg.com/564x/fa/3c/f1/fa3cf1a93c535769a37c9aa64e9a8332.jpg', 'https://i.pinimg.com/564x/f8/1d/71/f81d71a1f6a75144ebbc69ffbbc1cc1f.jpg', 'https://i.pinimg.com/564x/4e/b0/70/4eb07000929786c800dc8eda61106f15.jpg'];
         let index = 0;
@@ -373,7 +373,27 @@
         }, 3000);
         gambar.style.width = '300px';
         gambar.style.height = '450px'; 
+    </script> --}}
+    <script>
+        let gambar = document.getElementById('gambar');
+        let gambarArray = [
+            @foreach($jasas as $jasa)
+                '{{ asset('images/' . $jasa->gambar) }}',
+            @endforeach
+        ];
+        let index = 0;
+    
+        setInterval(function() {
+            index = (index + 1) % gambarArray.length;
+            gambar.src = gambarArray[index];
+        }, 3000);
+        gambar.style.width = '400px';
+        gambar.style.height = '450px'; 
     </script>
+    
+    
+    
+    
     <script src="https://kit.fontawesome.com/b604af375e.js" crossorigin="anonymous"></script>
 
 </body>

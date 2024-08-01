@@ -40,7 +40,7 @@
                         </tbody>
                     </table>
                     <a href="/servis/create" class="btn btn-outline-secondary">Tambah Jasa</a>
-                    <a href="/service" class="btn btn-outline-secondary">Kembali ke halaman</a>
+                    <a href="/adminmanage" class="btn btn-outline-secondary">Kembali</a>
                 </div>
             </div>
         </div>

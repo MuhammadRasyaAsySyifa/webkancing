@@ -27,9 +27,9 @@
                     <p><strong>Waktu:</strong> {{ $order->time }}</p>
                     <p><strong>Jumlah:</strong> {{ $order->qty }}</p>
                     <p><strong>Total Harga:</strong> Rp. {{ number_format($order->total_price, 0, ',', '.') }}</p>
+                    <button class="btn btn-secondary mt-3" id="pay-button">Bayar Sekarang</button>
                 </div>
             </div>
-            <button class="btn btn-secondary mt-3" id="pay-button">Bayar Sekarang</button>
         </div>
     </div>
 </div>

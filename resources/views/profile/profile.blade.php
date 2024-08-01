@@ -24,9 +24,8 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                        <p style="font-size: 18px;">Riwayat pemesanan</p> <!-- Menambahkan font-size di sini -->
-                        <p style="font-size: 18px;">Kamu belum membuat pemesanan</p> <!-- Menambahkan font-size di sini -->
                         <p style="font-size: 18px;">  
+                            <p style="font-size: 18px;">{{ Auth::user()->address }}</p> <!-- Menambahkan font-size di sini -->
                             @if (auth()->check() && auth()->user()->isAdmin())
                                 <a href="/adminmanage" class="btn btn-outline-secondary">Halaman Admin</a>
                             @endif</p>
@@ -38,6 +37,7 @@
                     @auth
                         <p style="font-size: 18px;">Detail akun</p> <!-- Menambahkan font-size di sini -->
                         <p style="font-size: 18px;">{{ Auth::user()->name }}</p> <!-- Menambahkan font-size di sini -->
+                        <p style="font-size: 18px;">{{ Auth::user()->email }}</p> <!-- Menambahkan font-size di sini -->
                         <a href="/editprofile" class="btn btn-secondary ml-2" style="color: white;">Edit Profile</a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-secondary ml-2" style="color: white;">Login</a>

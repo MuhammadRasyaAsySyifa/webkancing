@@ -20,6 +20,7 @@ class OrderController extends Controller
     {
     $request->request->add(['status' => 'Unpaid']);
         $order = Order::create($request->all());
+
                 /*Install Midtrans PHP Library (https://github.com/Midtrans/midtrans-php)
         composer require midtrans/midtrans-php
                                     
@@ -36,9 +37,9 @@ class OrderController extends Controller
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = false;
         // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$isSanitized = false;
         // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
+        \Midtrans\Config::$is3ds = false;
 
         $params = array(
             'transaction_details' => array(

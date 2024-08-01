@@ -339,7 +339,18 @@
 </nav> --}}
 @extends('layouts.home')
 @section('content')
-    
+@if (session('error'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{ session('error') }}'
+        });
+    });
+</script>
+@endif
+
 <!-- Konten Utama -->
 <div class="content-container">
     <div class="container">
@@ -364,11 +375,12 @@
 <div class="container mt-5 text-center">
     <h1 class="display-4">Our Service</h1>
     <div class="row" style="position: relative; right:100px;">
-        @foreach($jasas->slice(0, 2) as $jasa)
+        @foreach ($jasas as $jasa)
         <div class="col-md-6 mt-5">
             <img src="{{ asset('images/' . $jasa->gambar) }}" alt="{{ $jasa->nama }}" class="img-fluid">
             <h4>{{ $jasa->nama }}</h4>
             <p>{{ $jasa->deskripsi }}</p>
+            <p>Rp.{{ number_format($jasa->harga, 0, ',', '.') }}</p>
             <a href="/service" class="view-more" style="text-decoration:none;">View More</a>
         </div>
         @endforeach
@@ -383,7 +395,7 @@
                 <h1>Our Instagram</h1>
                 <p>Follow our store on Instagram</p>
                 <div class="instagram">
-                    <a href="https://www.instagram.com/rasyasyff/">Follow Us</a>
+                    <a href="https://www.instagram.com/kancingproduction/">Follow Us</a>
                 </div>
             </div>
         </div>

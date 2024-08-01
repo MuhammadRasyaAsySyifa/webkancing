@@ -87,26 +87,24 @@ class JasaController extends Controller
             'harga' => 'required|numeric',
             'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // optional: menambahkan validasi untuk jenis dan ukuran gambar
         ]);
-
+    
         // Temukan jasa berdasarkan ID
         $jasa = Jasa::findOrFail($id);
-
+    
         // Update data jasa berdasarkan data yang dikirim dari form
         $jasa->nama = $request->nama;
         $jasa->deskripsi = $request->deskripsi;
         $jasa->harga = $request->harga;
-
+    
         // Jika ada gambar yang dikirim dari form, simpan gambar yang baru
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
-            $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
-            $gambar->storeAs('public/images', $nama_gambar);
-            $jasa->gambar = $nama_gambar;
+            $jasa->saveImage($gambar);
         }
-
+    
         // Simpan perubahan pada data jasa
         $jasa->save();
-
+    
         // Redirect kembali ke halaman manage dengan pesan sukses
         return redirect()->route('servis.index')->with('success', 'Jasa berhasil diperbarui.');
     }

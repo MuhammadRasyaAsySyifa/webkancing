@@ -80,7 +80,7 @@
         @csrf
         <!-- Gambar -->
         <div class="col-md-6">
-            <img src="{{ asset('images/' . $jasa->gambar) }}" alt="{{ $jasa->nama }}" class="img-fluid" style="max-width: 400px; height:600px; border-radius:40px;">
+            <img src="{{ asset('images/' . $jasa->gambar) }}" alt="{{ $jasa->nama }}" class="img-fluid" style="max-width: 520px; height:600px; border-radius:40px;">
         </div>
         <!-- Deskripsi -->
         <div class="col-md-3">

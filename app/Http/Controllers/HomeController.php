@@ -44,7 +44,7 @@ class HomeController extends Controller
 
         Gallery::create(['gambar' => $gambarPath]);
 
-        return redirect('/gallery')->with('success', 'Gambar berhasil ditambahkan');
+        return redirect('/manage')->with('success', 'Gambar berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -68,9 +68,9 @@ class HomeController extends Controller
             $gambar->gambar = $gambarPath;
             $gambar->save();
 
-            return redirect('/gallery')->with('success', 'Gambar berhasil diubah');
+            return redirect('/manage')->with('success', 'Gambar berhasil diubah');
         } else {
-            return redirect('/gallery')->with('error', 'Gambar tidak ditemukan');
+            return redirect('/manage')->with('error', 'Gambar tidak ditemukan');
         }
     }
 
@@ -81,9 +81,9 @@ class HomeController extends Controller
         if ($gambar) {
             $gambar->delete();
 
-            return redirect('/gallery')->with('success', 'Gambar berhasil dihapus');
+            return redirect('/manage')->with('success', 'Gambar berhasil dihapus');
         } else {
-            return redirect('/gallery')->with('error', 'Gambar tidak ditemukan');
+            return redirect('/manage')->with('error', 'Gambar tidak ditemukan');
         }
     }
         public function showImage($id)
@@ -99,4 +99,3 @@ class HomeController extends Controller
 }
 
 }
-

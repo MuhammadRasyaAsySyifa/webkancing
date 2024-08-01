@@ -30,6 +30,7 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
+            'address' => 'required|string|max:255',
             'password' => 'nullable|string|min:8', // Password menjadi opsional
         ]);
 
@@ -39,6 +40,8 @@ class ProfileController extends Controller
         // Perbarui nama dan email pengguna
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->address = $request->address;
+
 
         // Perbarui password jika ada input password baru
         if ($request->filled('password')) {

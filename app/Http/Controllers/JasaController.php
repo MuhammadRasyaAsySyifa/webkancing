@@ -28,32 +28,43 @@ class JasaController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'nama' => 'required|string|max:255',
-        'deskripsi' => 'required|string',
-        'harga' => 'required|numeric|min:0',
-        'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk gambar
-    ]);
+    {
+        // Validasi data yang dikirim
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'deskripsilayanan' => 'required|string',
+            'harga' => 'required|numeric|min:0',
+            'include' => 'nullable|string|max:255', // Validasi untuk include
+            'penting' => 'nullable|string|max:255', // Validasi untuk penting
+            'kategori' => 'nullable|string|max:255', // Validasi untuk penting
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk gambar
+        ]);
+    
+        // Buat instance Jasa baru
+        $jasa = new Jasa();
+        $jasa->nama = $request->nama;
+        $jasa->deskripsi = $request->deskripsi;
+        $jasa->deskripsilayanan = $request->deskripsilayanan;
+        $jasa->harga = $request->harga;
+        $jasa->include = $request->include; // Simpan data include
+        $jasa->penting = $request->penting; // Simpan data penting
+        $jasa->kategori = $request->penting; // Simpan data penting
 
-    // Buat instance Jasa baru
-    $jasa = new Jasa();
-    $jasa->nama = $request->nama;
-    $jasa->deskripsi = $request->deskripsi;
-    $jasa->harga = $request->harga;
-
-    // Simpan gambar
-    if ($request->hasFile('gambar')) {
-        $image = $request->file('gambar');
-        $jasa->saveImage($image);
+    
+        // Simpan gambar
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $jasa->saveImage($image);
+        }
+    
+        // Simpan data ke dalam database
+        $jasa->save();
+    
+        // Redirect ke halaman indeks jasa dengan pesan sukses
+        return redirect()->route('servis.index')->with('success', 'Jasa berhasil ditambahkan.');
     }
-
-    // Simpan data ke dalam database
-    $jasa->save();
-
-    // Redirect ke halaman indeks jasa dengan pesan sukses
-    return redirect()->route('servis.index')->with('success', 'Jasa berhasil ditambahkan.');
-}
+    
 
     /**
      * Display the specified resource.
@@ -82,10 +93,14 @@ class JasaController extends Controller
     {
         // Validasi data yang dikirim dari form
         $request->validate([
-            'nama' => 'required',
-            'deskripsi' => 'required',
-            'harga' => 'required|numeric',
-            'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // optional: menambahkan validasi untuk jenis dan ukuran gambar
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'deskripsilayanan' => 'required|string',
+            'harga' => 'required|numeric|min:0',
+            'include' => 'nullable|string',
+            'penting' => 'nullable|string',
+            'kategori' => 'nullable|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // optional: validasi gambar
         ]);
     
         // Temukan jasa berdasarkan ID
@@ -94,12 +109,26 @@ class JasaController extends Controller
         // Update data jasa berdasarkan data yang dikirim dari form
         $jasa->nama = $request->nama;
         $jasa->deskripsi = $request->deskripsi;
+        $jasa->deskripsilayanan = $request->deskripsilayanan;
         $jasa->harga = $request->harga;
+        $jasa->include = $request->include;
+        $jasa->penting = $request->penting;
+        $jasa->kategori = $request->kategori;
+
     
         // Jika ada gambar yang dikirim dari form, simpan gambar yang baru
         if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($jasa->gambar) {
+                // Menghapus gambar lama dari direktori penyimpanan
+                Storage::delete('public/images/' . $jasa->gambar);
+            }
+    
+            // Simpan gambar baru
             $gambar = $request->file('gambar');
-            $jasa->saveImage($gambar);
+            $filename = time() . '.' . $gambar->getClientOriginalExtension();
+            $gambar->storeAs('public/images', $filename);
+            $jasa->gambar = $filename;
         }
     
         // Simpan perubahan pada data jasa
@@ -108,6 +137,7 @@ class JasaController extends Controller
         // Redirect kembali ke halaman manage dengan pesan sukses
         return redirect()->route('servis.index')->with('success', 'Jasa berhasil diperbarui.');
     }
+    
 
 
     /**
@@ -131,9 +161,11 @@ class JasaController extends Controller
 }
 
     public function service()
-    {
+    {   
         $jasas = Jasa::all();
-        return view('servis.service', compact('jasas'));  
+        $kategoris = Jasa::select('kategori')->distinct()->get();
+
+        return view('servis.service', compact('jasas', 'kategoris'));
     }
 
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Middleware\AdminMiddleware;
 use App\Http\Controllers\JasaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\JadwalController;
+
 
 
 /*
@@ -30,16 +32,35 @@ use App\Http\Controllers\ProfileController;
 // Route::delete('/gallery/{id}', [App\Http\Controllers\HomeController::class, 'destroy'])->name('destroy');
 // Route::get('/gallery/tampilkan/{id}', [App\Http\Controllers\HomeController::class, 'showImage'])->name('gallery.tampilkan');
 // Route::get('/manage', [App\Http\Controllers\HomeController::class, 'manage'])->middleware('admin');
+
+//gallery
 Route::resource('gallery', GalleryController::class);
 Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'gallery'])->name('gallery.gallery');
-Route::get('/service', [App\Http\Controllers\JasaController::class, 'service'])->name('service');
+
+//profile
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
 Route::get('/editprofile', [App\Http\Controllers\ProfileController::class, 'editprofile'])->name('editprofile');
 Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'updateProfile'])->name('profile.update');
+
+
+//servis
+Route::get('/service', [App\Http\Controllers\JasaController::class, 'service'])->name('service');
 Route::get('/homemanage', [App\Http\Controllers\HomeController::class, 'homemanage'])->middleware('admin');
-Route::get('/pemesanan/{id}', [App\Http\Controllers\OrderController::class, 'pemesanan'])->name('pemesanan');
-Route::post('/checkout',[App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');
+Route::get('/deskripsilayanan/{id}/isidata', [App\Http\Controllers\OrderController::class, 'isidata'])->name('isidata');
+Route::post('/checkout2',[App\Http\Controllers\OrderController::class, 'checkout2'])->name('checkout2');
 Route::get('/invoice/{id}',[App\Http\Controllers\OrderController::class, 'invoice'])->name('invoice');
+Route::get('/deskripsilayanan/{id}', [App\Http\Controllers\OrderController::class, 'deskripsilayanan'])->name('deskripsi.layanan');
+Route::get('/deskripsilayanan/{id}/isiwaktu', [App\Http\Controllers\OrderController::class, 'isiwaktu'])->name('isiwaktu');
+Route::post('/checkout1',[App\Http\Controllers\OrderController::class, 'checkout1'])->name('checkout1');
+// Tambahkan ke routes/web.php
+Route::post('/check-availability',[App\Http\Controllers\OrderController::class, 'checkAvailability'])->name('checkAvailability');
+
+//jadwal
+Route::resource('jadwal', JadwalController::class);
+Route::post('/toggle-status/{id}', [ProfileController::class, 'toggleStatus']);
+Route::post('/upload-bukti/{id}', [ProfileController::class, 'uploadBukti'])->name('upload-bukti');
+Route::get('/export-pdf', [ProfileController::class, 'exportPdf'])->name('exportpdf');
+
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
 Route::get('/adminmanage',[App\Http\Controllers\ProfileController::class, 'admin'])->name('admin');

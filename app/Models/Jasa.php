@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Jasa extends Model
 {
     protected $fillable = [
-        'nama', 'deskripsi', 'harga', 'gambar',
+        'nama', 'deskripsi', 'harga', 'gambar','deskripsilayanan','include','penting','kategori'
     ];
-
+    public function jadwals()
+    {
+        return $this->hasMany(Jadwal::class, 'id_jasa');
+    }
  // Metode untuk menyimpan gambar
  public function saveImage($image)
  {

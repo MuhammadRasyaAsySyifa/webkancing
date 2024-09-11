@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="website icon" type="png" href="{{ asset('images/logo 1.png') }}">
 
     <!-- Scripts -->
@@ -49,40 +51,104 @@
             }
 
 
-        .nav-item p{
-        margin-right: 35px;
-        text-align: center;
-        margin-top: 15px;
-        }
-        .nav-item .nav-link{
-            color: black !important;
-            font-weight: 500;
-            font-size: 110%;
-        }
-        .nav-item{
-            position: relative;
-            left: 70px;
-        }
-        .nav-item i{
-            margin-left: 13px;
-        }
+            .navbar-nav {
+    display: flex;
+    justify-content: center; 
+    flex: 1;
+    font-size: 15px;
+}
 
-        .nav-icon{
-            color: black !important;
-            font-size: 130%;
-            position: relative;
-            right: 100px;
-        }
-        
+.navbar-nav .nav-item {
+    margin: 0 10px; 
+}
+
+.navbar-nav .nav-item:last-child {
+    margin-left:10px; 
+}
+
 /* CSS */
 .navbar-brand img {
-    max-height: 130px; /* Sesuaikan ukuran yang diinginkan */
-    position: relative; left: 50%;
+    max-height: 110px; /* Sesuaikan ukuran yang diinginkan */
+    position: relative; left: 35%;
 }
 
 .navbar {
     height: 70px; /* Tinggi navbar konstan */
 }
+
+
+            .nav-item .nav-link{
+                color: black !important;
+                font-weight: 500;
+                font-size: 110%;
+                position: relative;
+                right: 90px;
+            }
+            .nav-item span {
+                position: relative;
+                left:150px;
+            }
+            
+            .nav-icon{
+                color: black !important;
+                font-size: 130%;
+                position: relative;
+                right: 30px;
+            }
+            .nav-item.dropdown a.nav-link  {
+            position: relative;
+            left: 40px; /* Sesuaikan nilai ini dengan yang diinginkan */
+            }
+
+            @media (max-width: 767.98px) {
+            .offcanvas-end {
+            width: 190px !important; 
+            }
+
+
+            .offcanvas-body {
+                padding: 1rem; 
+            }
+
+            .offcanvas-body .nav-link {
+                font-size: 1.25rem; 
+                padding: 1rem 0; 
+                position: relative;
+                right: 10px;
+                text-align: center;
+                
+            }
+            .nav-link i {
+                position: relative;
+                right: 21px;
+                left: auto;
+                right: auto;
+            }
+            .nav-link span{
+                position: relative;
+                right: 20px; 
+                left: auto;
+            }
+            .offcanvas-body .nav-item {
+                margin: 0; 
+            }
+            .navbar-toggler {
+                    position: relative;
+                    right: 10px;
+                    bottom: 15px;
+            }
+
+            .navbar-brand img {
+                    max-height: 90px; 
+                    width: 170px;
+                    position: relative;
+                    bottom: 15px;
+                    left: auto;
+            }
+            .nav-item span{
+                position: relative;
+                left: 2px;
+            }
 
 .content-container {
     background-color: #D4D4D4;
@@ -149,6 +215,7 @@
             border-bottom: 1px solid black; /* Properti untuk garis bawah */
             padding-bottom: 5px; /* Mengatur jarak vertikal dari bawah teks */
         }
+    }
     </style>
 </head>
 <body>
@@ -263,5 +330,7 @@
         });
     };
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

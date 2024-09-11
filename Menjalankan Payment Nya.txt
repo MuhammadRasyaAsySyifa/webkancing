@@ -2,7 +2,7 @@ pertama jalankan aplikasi seperti biasa
 terus buka ngrokn dengan seperti dibawah ini
 D:\>cd tugas
 
-D:\Tugas>php -S localhost:7000 -t rasya/public
+php -S localhost:7000 -t rasya/public
 
 lalu jika sudah tidak ada masalah buka ngrok lagi
 lalu ketikkan

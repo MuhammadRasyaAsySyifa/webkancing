@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-15">
             <div class="card" style="padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 1200px; margin: 0 auto;">
@@ -18,6 +18,7 @@
                                 <th>Deskripsi Layanan</th>
                                 <th>Include</th>
                                 <th>Penting</th>
+                                <th>Durasi</th>
                                 <th>Kategori</th>
                                 <th>Aksi</th>
                             </tr>
@@ -26,13 +27,14 @@
                             @foreach ($jasas as $jasa)
                             <tr>
                                 <td>{{ $jasa->id }}</td>
-                                <td><img src="{{ asset('images/' . $jasa->gambar) }}" alt="{{ $jasa->nama }}" style="max-width: 100px;"></td>
+                                <td><img src="{{ asset('storage/images/' . $jasa->gambar) }}" alt="{{ $jasa->nama }}" style="max-width: 200px;"></td>
                                 <td>{{ $jasa->nama }}</td>
                                 <td>Rp. {{ number_format($jasa->harga, 0, ',', '.') }}</td>
                                 <td>{{ $jasa->deskripsi }}</td>
                                 <td>{{ $jasa->deskripsilayanan }}</td>
                                 <td>{{ $jasa->include }}</td>
                                 <td>{{ $jasa->penting }}</td>
+                                <td>{{ $jasa->durasi  }}Menit</td>
                                 <td>{{ $jasa->kategori}}</td>
                                 <td>
                                     <a href="{{ route('servis.edit', $jasa->id) }}" class="btn btn-primary btn-sm">Edit</a>

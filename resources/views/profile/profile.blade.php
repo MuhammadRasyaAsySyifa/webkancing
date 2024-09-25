@@ -1,4 +1,4 @@
-@extends('layouts.profile')
+@extends('layouts.app')
 @section('content')
 <div class="background-container">
     <div class="container">
@@ -11,44 +11,85 @@
         </div>
     </div>
 </div>
-<br><br>    
+
+<br><br>
+
 <div class="container mt-5">
-    <div class="row mx-auto" style="position: relative; left: 5%;">
+    <div class="row justify-content-center"> <!-- Menggunakan Bootstrap Grid untuk responsif -->
         <div class="col-md-6">
-            <div class="d-flex justify-content-between align-items-center" style="position: relative; left: 40%;">
-                <div class="text-left">
-                    <h4 style="font-size: 24px;">Akun Profile</h4> <!-- Menambahkan font-size di sini -->
+            <div class="d-flex justify-content-between align-items-start"> <!-- Flexbox untuk tampilan horizontal -->
+                <div class="text-left mb-3">
+                    <h4 class="profile-title">Akun Profile</h4>
                     @auth
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <p style="font-size: 18px; color: black !important;">Logout</p>
+                            <p class="logout-text">Logout</p>
                         </a>
                         <!-- Form untuk logout -->
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                        <p style="font-size: 18px;">  
-                            <p style="font-size: 18px;">{{ Auth::user()->address }}</p> <!-- Menambahkan font-size di sini -->
-                            @if (auth()->check() && auth()->user()->isAdmin())
-                                <a href="/adminmanage" class="btn btn-outline-secondary">Halaman Admin</a>
-                            @endif</p>
+                        <p class="user-info">{{ Auth::user()->address }}</p>
+                        @if (auth()->check() && auth()->user()->isAdmin())
+                            <a href="/adminmanage" class="btn btn-outline-secondary">Halaman Admin</a>
+                        @endif
                     @else
-                        <p style="font-size: 18px;">Silakan login untuk melihat profil Anda.</p>
+                        <p class="user-info">Silakan login untuk melihat profil Anda.</p>
                     @endauth
                 </div>
                 <div class="text-right">
                     @auth
-                        <p style="font-size: 18px;">Detail akun</p> <!-- Menambahkan font-size di sini -->
-                        <p style="font-size: 18px;">{{ Auth::user()->name }}</p> <!-- Menambahkan font-size di sini -->
-                        <p style="font-size: 18px;">{{ Auth::user()->email }}</p> <!-- Menambahkan font-size di sini -->
-                        <a href="/editprofile" class="btn btn-secondary ml-2" style="color: white;">Edit Profile</a>
+                        <p class="user-info">Detail akun</p>
+                        <p class="user-info">{{ Auth::user()->name }}</p>
+                        <p class="user-info">{{ Auth::user()->email }}</p>
+                        <a href="/editprofile" class="btn btn-secondary ml-2">Edit Profile</a>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-secondary ml-2" style="color: white;">Login</a>
+                        <a href="{{ route('login') }}" class="btn btn-secondary ml-2">Login</a>
                     @endauth
                 </div>
             </div>
-            
         </div>
     </div>
 </div>
 
 @endsection
+
+<style>
+    .profile-title {
+        font-size: 24px;
+    }
+
+    .logout-text {
+        font-size: 18px;
+        color: black !important;
+    }
+
+    .user-info {
+        font-size: 18px;
+    }
+
+    /* Responsif untuk layar kecil, tetap horizontal */
+    @media (max-width: 768px) {
+        .profile-title {
+            font-size: 20px; /* Sesuaikan ukuran font untuk layar kecil */
+        }
+
+        .logout-text, .user-info {
+            font-size: 16px; /* Ukuran font lebih kecil pada layar kecil */
+        }
+
+        .d-flex {
+            flex-wrap: wrap; /* Gunakan wrap agar elemen tidak menumpuk di layar kecil */
+            justify-content: space-between; /* Memastikan jarak antara elemen */
+        }
+
+        .text-left, .text-right {
+            flex: 1; /* Membuat kedua kolom memakan ruang yang sama */
+            text-align: left; /* Tetap kiri, bukan pusat */
+            margin-bottom: 10px; /* Tambahkan margin jika diperlukan */
+        }
+
+        .text-right {
+            text-align: right; /* Tetap rata kanan */
+        }
+    }
+</style>

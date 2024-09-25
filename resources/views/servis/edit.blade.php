@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<style>
+    .form-group.row{
+        margin-bottom:15px;
+    }
+</style>
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -30,7 +35,7 @@
                             <label for="deskripsi" class="col-md-4 col-form-label text-md-right">Deskripsi</label>
 
                             <div class="col-md-6">
-                                <textarea id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" required>{{ old('deskripsi', $jasa->deskripsi) }}</textarea>
+                                <textarea id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="3" required>{{ old('deskripsi', $jasa->deskripsi) }}</textarea>
 
                                 @error('deskripsi')
                                     <span class="invalid-feedback" role="alert">
@@ -44,7 +49,7 @@
                             <label for="deskripsilayanan" class="col-md-4 col-form-label text-md-right">Deskripsi Layanan</label>
                         
                             <div class="col-md-6">
-                                <textarea id="deskripsilayanan" class="form-control @error('deskripsilayanan') is-invalid @enderror" name="deskripsilayanan" rows="4" required>{{ old('Deskripsi Layanan', $jasa->deskripsilayanan) }}</textarea>
+                                <textarea id="deskripsilayanan" class="form-control @error('deskripsilayanan') is-invalid @enderror" name="deskripsilayanan" rows="10" required>{{ old('Deskripsi Layanan', $jasa->deskripsilayanan) }}</textarea>
                                 @error('deskripsilayanan')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -56,10 +61,11 @@
                         
                         <div class="form-group row">
                             <label for="harga" class="col-md-4 col-form-label text-md-right">Harga</label>
-
+                        
                             <div class="col-md-6">
-                                <input id="harga" type="number" class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{ old('harga', $jasa->harga) }}" required>
-
+                                <input id="harga" type="text" class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{ old('harga', $jasa->harga) }}" required
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Masukkan harga">
+                                
                                 @error('harga')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -67,12 +73,13 @@
                                 @enderror
                             </div>
                         </div>
+                        
 
                         <div class="form-group row">
                             <label for="include" class="col-md-4 col-form-label text-md-right">Include</label>
                         
                             <div class="col-md-6">
-                                <textarea id="include" class="form-control @error('include') is-invalid @enderror" name="include" rows="6">{{ old('include', $jasa->include ?? "-\n-\n-\n-\n-") }}</textarea>
+                                <textarea id="include" class="form-control @error('include') is-invalid @enderror" name="include" rows="8">{{ old('include', $jasa->include ?? "-\n-\n-\n-\n-\n-") }}</textarea>
                         
                                 @error('include')
                                     <span class="invalid-feedback" role="alert">
@@ -98,13 +105,30 @@
                         </div>
                         
                         <div class="form-group row">
+                            <label for="durasi" class="col-md-4 col-form-label text-md-right">Durasi (Menit):</label>
+
+                            <div class="col-md-6">
+                                <input type="number" name="durasi" id="durasi" class="form-control  @error('durasi') is-invalid @enderror" value="{{ old('durasi', $jasa->durasi) }}"  required>
+
+                                @error('durasi')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
                             <label for="kategori" class="col-md-4 col-form-label text-md-right">Kategori</label>
                         
                             <div class="col-md-6">
                                 <select id="kategori" class="form-select @error('kategori') is-invalid @enderror" name="kategori">
-                                    <option value="" selected>Pilih Kategori</option>
-                                    <option value="Self Photo Studio" {{ old('kategori') == 'Self Photo Studio' ? 'selected' : '' }}>Self Photo Studio</option>
-                                    <option value="Photo Studio" {{ old('kategori') == 'Photo Studio' ? 'selected' : '' }}>Photo Studio</option>
+                                    <option value="" {{ $jasa->kategori == '' ? 'selected' : '' }}>Pilih Kategori</option>
+                                    <option value="Self Photo Studio" {{ $jasa->kategori == 'Self Photo Studio' ? 'selected' : '' }}>Self Foto Studio</option>
+                                    <option value="Photo Studio" {{ $jasa->kategori == 'Photo Studio' ? 'selected' : '' }}>Foto Studio</option>
+                                    <option value="Photo Strip" {{ $jasa->kategori == 'Photo Strip' ? 'selected' : '' }}>Foto Strip</option>
+                                    <option value="Polaroid" {{ $jasa->kategori == 'Polaroid' ? 'selected' : '' }}>Polaroid</option>
                                 </select>
                         
                                 @error('kategori')
@@ -115,6 +139,7 @@
                             </div>
                         </div>
                         
+                        
                         <div class="form-group row">
                             <label for="gambar" class="col-md-4 col-form-label text-md-right">Gambar</label>
 
@@ -123,7 +148,7 @@
 
                                 @if($jasa->gambar)
                                     <div class="mt-2">
-                                        <img src="{{ asset('images/' . $jasa->gambar) }}" alt="Gambar Jasa" class="img-thumbnail" style="max-width: 150px;">
+                                        <img src="{{ asset('storage/images/' . $jasa->gambar) }}" alt="{{ $jasa->nama }}" alt="Gambar Jasa" class="img-thumbnail" style="max-width: 150px;">
                                     </div>
                                 @endif
 

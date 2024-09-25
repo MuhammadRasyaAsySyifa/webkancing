@@ -94,31 +94,7 @@
                 max-width: 100%;
                 border-radius: 10px;
             }
-            .view-more {
-                color: black !important;
-                text-decoration: none; /* Menghapus garis bawah bawaan dari teks */
-                border-bottom: 1px solid black; /* Properti untuk garis bawah */
-                padding-bottom: 5px; /* Mengatur jarak vertikal dari bawah teks */
-            }
             
-            
-
-            .col-md-6 img {
-                max-width: 60%;
-                height: 80%;
-                object-fit: cover; /* Menjaga rasio aspek gambar */
-                border-radius: 50px;
-                margin-bottom: 20px ; 
-                width: 300px;
-            }
-            
-
-            .col-md-6{
-                position: relative; left: 100px;
-                font-family: 'Outfit';
-                font-size: medium;
-                margin-bottom: 60px ; 
-            }
             
             .background-container {
                 background-image: url('{{ asset('images/instagram.png') }}');
@@ -178,115 +154,155 @@
             .footer1-container{
                 height: auto;
             }
-          
+/* Navbar container */
+.navbar {
+    height: 80px; /* Fixed height for the navbar */
+    position: relative; /* Make navbar the positioning context for absolute elements */
+    display: flex;
+    justify-content: space-between; /* Align logo to the left and menu to the right */
+    align-items: center;
+}
+
+/* Center the menu items */
 .navbar-nav {
     display: flex;
     justify-content: center; 
     flex: 1;
     font-size: 15px;
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
 }
 
-
-    /* CSS */
-    .navbar-brand img {
-        max-height: 110px; /* Sesuaikan ukuran yang diinginkan */
-        position: relative; left: 35%;
-    }
-
-    .navbar {
-        height: 70px; /* Tinggi navbar konstan */
-    }
-
+/* Adjust margins for nav items */
 .navbar-nav .nav-item {
     margin: 0 10px; 
 }
 
 .navbar-nav .nav-item:last-child {
-    margin-left:10px; 
+    margin-left: 10px; 
 }
 
-            .nav-item .nav-link{
-                color: black !important;
-                font-weight: 500;
-                font-size: 110%;
-                position: relative;
-                right: 90px;
-            }
-            .nav-item span {
-                position: relative;
-                left:150px;
-            }
-            
-            .nav-icon{
-                color: black !important;
-                font-size: 130%;
-                position: relative;
-                right: 30px;
-            }
-            .nav-item.dropdown a.nav-link  {
-            position: relative;
-            left: 40px; /* Sesuaikan nilai ini dengan yang diinginkan */
-            }
+/* Navbar brand positioning */
+.navbar-brand {
+    margin-right: auto; /* Pushes the logo to the left */
+}
 
-            @media (max-width: 767.98px) {
-            .offcanvas-end {
-            width: 190px !important; 
-            }
+/* Navbar brand image */
+.navbar-brand img {
+    max-height: 110px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+}
 
+/* Profile positioning */
+.profile {
+    margin-left: auto; /* Align to the right */
+}
 
-            .offcanvas-body {
-                padding: 1rem; 
-            }
+/* Styling for nav links */
+.nav-item .nav-link {
+    color: black !important;
+    font-weight: 500;
+    font-size: 110%;
+}
 
-            .offcanvas-body .nav-link {
-                font-size: 1.25rem; 
-                padding: 1rem 0; 
-                position: relative;
-                right: 10px;
-                text-align: center;
-                
-            }
-            .nav-link i {
-                position: relative;
-                right: 21px;
-                left: auto;
-                right: auto;
-            }
-            .nav-link span{
-                position: relative;
-                right: 20px; 
-                left: auto;
-            }
-            .offcanvas-body .nav-item {
-                margin: 0; 
-            }
-            .navbar-toggler {
-                    position: relative;
-                    right: 10px;
-                    bottom: 15px;
-            }
+/* Styling for nav icons */
+.nav-icon {
+    color: black !important;
+    font-size: 130%;
+}
 
-            .navbar-brand img {
-                    /* max-height: 90px;  */
-                    height: 210px;
-                    width: 240px;
-                    position: relative;
-                    bottom: 15px;
-                    left: auto;
-            }
-            .nav-item span{
-                position: relative;
-                left: 2px;
-            }
-            .navbar{
-                height: 100px;
-            }
+/* Adjustments for dropdown menu items */
+.nav-item.dropdown a.nav-link {
+    position: relative;
+    left: 40px;
+}
+
+/* Container inside navbar to add margin */
+.navbar {
+    padding-left: 200px; /* Add left padding */
+    padding-right: 200px; /* Add right padding */
+    box-sizing: border-box; /* Include padding in the width/height calculations */
+}
+/* .container{
+    padding-left:  50px;    
+    padding-right: 50px; 
+} */
+iframe{
+    margin-right:30px;
+}
+/* Mobile view adjustments */
+@media (max-width: 767.98px) {
+    
+    .offcanvas-end {
+        width: 190px !important; 
+    }
+
+    .offcanvas-body {
+        padding: 1rem; 
+    }
+
+    .offcanvas-body .nav-link {
+        font-size: 1.25rem; 
+        padding: 1rem 0; 
+        text-align: center;
+    }
+
+    .nav-link i {
+        position: relative;
+        right: 0;
+    }
+
+    .profile {
+        position: relative;
+        left: auto;
+        right: 40px;
+        top: 3px;
+    }
+
+    .offcanvas-body .nav-item {
+        margin: 0; 
+    }
+ /* Navbar container adjustments for mobile */
+.navbar {
+    height: 80px !important;
+    padding: 10px 15px; /* Adjust padding for mobile */
+    flex-direction: column; /* Stack items vertically */
+    height: auto; /* Auto height for smaller screens */
+    position: relative; /* Ensure proper positioning context for children */
+}
+
+/* Ensure the logo is aligned to the left */
+.navbar-brand {
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    position: absolute; /* Position it absolutely within the navbar */
+    left: 15px; /* Adjust as needed */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust vertical centering */
+}
+
+/* Adjust logo size for mobile */
+.navbar-brand img {
+    width: 250px; /* Set a smaller width for mobile */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn’t exceed the container width */
+}
+
+/* Toggler button on the right */
+.navbar-toggler {
+    position: absolute; /* Position it absolutely within the navbar */
+    right: 15px; /* Adjust as needed */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust vertical centering */
+    margin: 0; /* Remove any default margin */
+}
+
              .footer img {
         display: none;
     }
 
     .footer {
-        margin-top: 20px;
+        margin-top: 1   0px;
     }
 
     .footer1-container {
@@ -294,14 +310,16 @@
     }
 
     .contact-info {
-        text-align: center;
-        margin-top: 20px;
-        margin-left: 0;
+        flex-direction: column; /* Vertikal untuk mobile */
+        align-items: center; /* Meratakan konten di tengah */
+        text-align: center; /* Meratakan teks ke tengah */
     }
 
     #map {
-        width: 100%;
-        height: 200px;
+        width: 100%; /* Mengatur lebar peta di mobile */
+        height: 200px; /* Mengatur tinggi peta */
+        margin-right: 0; /* Menghapus margin di mobile */
+        margin-bottom: 40px; /* Jarak antara peta dan informasi kontak */
     }
 
     .contact-info h4, 
@@ -333,24 +351,35 @@
     .content-text h1 {
         font-size: 24px; /* Adjust font size if needed */
         text-align: left; /* Ensure heading aligns to the left */
-        margin-bottom: 15px; /* Adjust margin if needed */
+        margin-bottom: 10px; /* Adjust margin if needed */
         position: relative;
         right: 190px;
         top: 60px;
     }
 
     .content-text p {
-        font-size: 15px; /* Adjust font size if needed */
+        font-size: 14px; /* Adjust font size if needed */
         text-align: left; /* Align paragraph to the right */
         position: relative;
-        bottom: 75px;
-        width: 240px;
-        right: 60px;
+        bottom: 67px;
+        width: 220px;
+        right: 50px;
     }
 
     .content-image {
         display: none; /* Hide image on mobile */
     }
+    .col-md-6{
+        width: 380px;
+        height: 300px;
+
+    }
+    .justified-text {
+    text-align: justify !important;
+} 
+iframe{
+    margin-right:auto;
+}
 }
 
 
@@ -360,13 +389,13 @@
         <div id="app">
             <nav class="navbar navbar-expand-lg navbar-light custom-navbar navbar-dark" style="background-color: #D4D4D4;">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand">
                         <img src="{{ asset('images/logo polos 2.png') }}" alt="Logo Anda">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-        
+            
                     <!-- Sidebar for mobile -->
                     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                         <div class="offcanvas-header">
@@ -379,70 +408,62 @@
                                     <a class="nav-link" href="{{ url('/') }}">Home</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/about') }}">About</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/gallery') }}">Gallery</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/service')}}">Service</a>
                                 </li>
+                                <div class="profile">
                                 @guest
                                     @if (Route::has('login'))
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('login') }}"><i class="fa-regular fa-user" style="position: relative; left:140px;"></i> <span>Masuk</span></a>
+                                            <a class="nav-link" href="{{ route('login') }}"><i class="fa-regular fa-user"></i> <span>Masuk</span></a>
                                         </li>
                                     @endif
                                 @else
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa-regular fa-user"></i>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('profile') }}">
+                                            <i class="fa-solid fa-user" style="margin-right: 8px;"></i>
+                                            {{ Auth::user()->name }}
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" >
-                                            <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                @csrf
-                                            </form>
-                                        </div>
                                     </li>
                                 @endguest
+                            </div>
                             </ul>
                         </div>
                     </div>
                 </div>
             </nav>
-            
+    
             <main>
                 @yield('content')
             </main>
-            <div class="footer mt-5">
-            <div class="footer1-container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 d-flex align-items-center justify-content-center">
-                            <img src="images/logo polos 2.png" width="350px">
-                            <div class="contact-info ml-4">
-                                <h4 style="cursor:pointer;" onclick="toggleMap()">
-                                    <i class="fas fa-map-marker-alt">&nbsp;</i>Lokasi Kami
+            <div class="footer mt-4">
+                <div class="footer1-container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 d-flex align-items-center justify-content-center contact-info">
+                                <div id="map" style="display:block;">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.2196474109287!2d114.58740531068628!3d-3.295711941110598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de4211bbc1be42d%3A0xd93490f4e3d79a8e!2sSMK%20Negeri%202%20Banjarmasin!5e0!3m2!1sid!2sid!4v1725170568188!5m2!1sid!2sid" width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                                <div class="contact-info ml-4">
+                                    <h4 style="cursor:pointer;" onclick="toggleMap()">
+                                        <i class="fas fa-map-marker-alt">&nbsp;</i>Lokasi Kami
                                     </h4>
-                                
-                                <div id="map" style="display:none;">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.2196474109287!2d114.58740531068628!3d-3.295711941110598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de4211bbc1be42d%3A0xd93490f4e3d79a8e!2sSMK%20Negeri%202%20Banjarmasin!5e0!3m2!1sid!2sid!4v1725170568188!5m2!1sid!2sid"  width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                </div>     
-
-                                <p>Jl. Brig Jend. Hasan Basri No.6,<br> Sungai Miai, Kec. Banjarmasin Utara,<br>Kota Banjarmasin, Kalimantan Selatan 70124</p>
-                                <p><i class="fas fa-clock">&nbsp;</i> Senin - Jum'at 08:00 - 11.00</p>
-                                <p><i class="fas fa-phone-alt flipped-phone" style="transform: scaleX(-1);"></i>&nbsp; +62 811-5134-34</p>
-                                <p><i class="fas fa-envelope">&nbsp;</i> kancingproduction@gmail.com</p>
+                                    <p>Jl. Brig Jend. Hasan Basri No.6,<br> Sungai Miai, Kec. Banjarmasin Utara,<br>Kota Banjarmasin, Kalimantan Selatan 70124</p>
+                                    <p><i class="fas fa-clock">&nbsp;</i> Senin - Jum'at 08:00 - 11.00</p>
+                                    <p><i class="fas fa-phone-alt flipped-phone" style="transform: scaleX(-1);"></i>&nbsp; +62 811-5134-34</p>
+                                    <p><i class="fas fa-envelope">&nbsp;</i> kancingproduction@gmail.com</p>
+                                </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            
             <footer class="d-flex flex-column align-items-center justify-content-center">
                 <hr> <!-- Pembatas -->
                 <p>&copy; 2023 Kancing Production. All Rights Reserved.</p>

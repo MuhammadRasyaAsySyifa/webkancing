@@ -42,7 +42,7 @@ class OrderController extends Controller
             'availableDates' => $availableDates,
             'unavailableDates' => $unavailableDates,
             'timesByDate' => $timesByDate,
-            'durasi' => $durasi, // Kirim durasi ke view
+            'durasi' => $jasa->durasi,// Kirim durasi ke view
         ]);
     }
     
@@ -102,9 +102,11 @@ class OrderController extends Controller
                             ->where('time', $time)
                             ->exists();
 
-    if ($isAlreadyBooked) {
-        // Arahkan kembali dengan pesan error
-        return redirect()->back()->withErrors('Waktu yang dipilih sudah dibooking. Silakan pilih waktu lain.');
+  if ($isAlreadyBooked) {
+        // Simpan pesan notifikasi dalam session
+        session()->flash('error', 'Aduhh maaf ya waktu pada jam ' . $time . ' sudah dibooking. Silakan pilih waktu lain.');
+        // Arahkan kembali ke halaman sebelumnya
+        return redirect()->back();
     }
 
     // Simpan data pemesanan dalam session
@@ -113,26 +115,59 @@ class OrderController extends Controller
     // Arahkan ke halaman isidata dengan ID jasa
     return redirect()->route('isidata', ['id' => $jasaId]);
 }
-
 public function checkAvailability(Request $request)
 {
+    // Validasi input dari request
     $validatedData = $request->validate([
-        'date' => 'required|date',
-        'time' => 'required',
-        'jasa_id' => 'required|integer',
+        'date' => 'required|date',           // Pastikan tanggal valid
+        'time' => 'required|string',         // Pastikan waktu berupa string (misalnya: '08:00')
+        'jasa_id' => 'required|integer',     // Pastikan jasa_id adalah integer
     ]);
 
+    // Ambil nilai yang telah divalidasi
     $date = $validatedData['date'];
     $time = $validatedData['time'];
     $jasaId = $validatedData['jasa_id'];
 
+    // Cek apakah waktu tersebut sudah dipesan
     $isAlreadyBooked = Order::where('jasa_id', $jasaId)
                             ->where('date', $date)
                             ->where('time', $time)
-                            ->exists();
+                            ->exists();  // Menggunakan exists() untuk pengecekan
 
-    return response()->json(['isAlreadyBooked' => $isAlreadyBooked]);
+    // Kembalikan response dalam format JSON
+    if ($isAlreadyBooked) {
+        return response()->json([
+            'isAlreadyBooked' => true,
+            'message' => 'Waktu sudah dipesan untuk jasa ini.'
+        ]);
+    } else {
+        return response()->json([
+            'isAlreadyBooked' => false,
+            'message' => 'Waktu tersedia untuk dipesan.'
+        ]);
+    }
 }
+
+// public function checkAvailability(Request $request)
+// {
+//     $validatedData = $request->validate([
+//         'date' => 'required|date',
+//         'time' => 'required',
+//         'jasa_id' => 'required|integer',
+//     ]);
+
+//     $date = $validatedData['date'];
+//     $time = $validatedData['time'];
+//     $jasaId = $validatedData['jasa_id'];
+
+//     $isAlreadyBooked = Order::where('jasa_id', $jasaId)
+//                             ->where('date', $date)
+//                             ->where('time', $time)
+//                             ->exists();
+
+//     return response()->json(['isAlreadyBooked' => $isAlreadyBooked]);
+// }
 
 
     

@@ -14,7 +14,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="website icon" type="png" href="{{ asset('images/logo 1.png') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -57,186 +60,162 @@
         font-family: 'Outfit'; /* Font yang digunakan */
         margin: 0; /* Menghilangkan margin default pada h1 */
     }
-.content-container {
-    background-color: #D4D4D4;
-    padding: 20px;
-    font-family: 'Outfit', sans-serif;
-    height: 560px;
-    position: relative;bottom: 
+
+/* Navbar container */
+.navbar {
+    height: 80px; /* Fixed height for the navbar */
+    position: relative; /* Make navbar the positioning context for absolute elements */
+    display: flex;
+    justify-content: space-between; /* Align logo to the left and menu to the right */
+    align-items: center;
 }
 
-        
-        .content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 100%;
-            margin-right: 60px;
-            
-        }
-
-        .content-text {
-            max-width: 50%;
-        }
-
-        .content-text h1 {
-            font-size: 36px;
-            font-weight: 600;
-            margin-bottom: 50px;
-        }
-
-        .content-text p {
-            font-size: 18px;
-            line-height: 1.5;
-            text-align: left; /* Mengatur teks menjadi rata kiri */
-        }  
-        .col-md-5 img {
-            max-width: 60%;
-            height: 60%;
-            object-fit: cover; /* Menjaga rasio aspek gambar */
-            border-radius: 50px;
-            margin-bottom: 20px ; 
-            width: 300px;
-        }
-        
-
-        .col-md-5{
-            position: relative; left: 180px;
-            font-family: 'Outfit';
-            font-size: medium;
-        }
-
-        .content-image {
-            max-width: 50%;
-            padding: 20px;
-        }
-
-        .content-image img {
-            max-width: 100%;
-            border-radius: 10px;
-        }
-        .view-more {
-            color: black !important;
-            text-decoration: none; /* Menghapus garis bawah bawaan dari teks */
-            border-bottom: 1px solid black; /* Properti untuk garis bawah */
-            padding-bottom: 5px; /* Mengatur jarak vertikal dari bawah teks */
-        }
-        .navbar-nav {
+/* Center the menu items */
+.navbar-nav {
     display: flex;
     justify-content: center; 
     flex: 1;
     font-size: 15px;
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
 }
 
+/* Adjust margins for nav items */
 .navbar-nav .nav-item {
     margin: 0 10px; 
 }
 
 .navbar-nav .nav-item:last-child {
-    margin-left:10px; 
+    margin-left: 10px; 
 }
 
-/* CSS */
+/* Navbar brand positioning */
+.navbar-brand {
+    margin-right: auto; /* Pushes the logo to the left */
+}
+
+/* Navbar brand image */
 .navbar-brand img {
-    max-height: 110px; /* Sesuaikan ukuran yang diinginkan */
-    position: relative; left: 35%;
+    max-height: 110px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
 }
 
+/* Profile positioning */
+.profile {
+    margin-left: auto; /* Align to the right */
+}
+
+/* Styling for nav links */
+.nav-item .nav-link {
+    color: black !important;
+    font-weight: 500;
+    font-size: 110%;
+}
+
+/* Styling for nav icons */
+.nav-icon {
+    color: black !important;
+    font-size: 130%;
+}
+
+/* Adjustments for dropdown menu items */
+.nav-item.dropdown a.nav-link {
+    position: relative;
+    left: 40px;
+}
+
+/* Container inside navbar to add margin */
 .navbar {
-    height: 70px; /* Tinggi navbar konstan */
+    padding-left: 200px; /* Add left padding */
+    padding-right: 200px; /* Add right padding */
+    box-sizing: border-box; /* Include padding in the width/height calculations */
+}
+/* .container{
+    padding-left:  50px;    
+    padding-right: 50px; 
+} */
+/* Mobile view adjustments */
+@media (max-width: 767.98px) {
+    
+    .offcanvas-end {
+        width: 190px !important; 
+    }
+
+    .offcanvas-body {
+        padding: 1rem; 
+    }
+
+    .offcanvas-body .nav-link {
+        font-size: 1.25rem; 
+        padding: 1rem 0; 
+        text-align: center;
+    }
+
+    .nav-link i {
+        position: relative;
+        right: 0;
+    }
+
+    .profile {
+        position: relative;
+        left: auto;
+        right: 40px;
+        top: 3px;
+    }
+
+    .offcanvas-body .nav-item {
+        margin: 0; 
+    }
+ /* Navbar container adjustments for mobile */
+.navbar {
+    height: 80px !important;
+    padding: 10px 15px; /* Adjust padding for mobile */
+    flex-direction: column; /* Stack items vertically */
+    height: auto; /* Auto height for smaller screens */
+    position: relative; /* Ensure proper positioning context for children */
 }
 
+/* Ensure the logo is aligned to the left */
+.navbar-brand {
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    position: absolute; /* Position it absolutely within the navbar */
+    left: 15px; /* Adjust as needed */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust vertical centering */
+}
 
-            .nav-item .nav-link{
-                color: black !important;
-                font-weight: 500;
-                font-size: 110%;
-                position: relative;
-                right: 70px;
-            }
-            .nav-item span {
-                position: relative;
-                left:150px;
-            }
-            
-            .nav-icon{
-                color: black !important;
-                font-size: 130%;
-                position: relative;
-                right: 30px;
-            }
-            .nav-item.dropdown a.nav-link  {
-            position: relative;
-            left: 40px; /* Sesuaikan nilai ini dengan yang diinginkan */
-            }
-            @media (max-width: 767.98px) {
-            .offcanvas-end {
-            width: 190px !important; 
-            }
+/* Adjust logo size for mobile */
+.navbar-brand img {
+    width: 250px; /* Set a smaller width for mobile */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn’t exceed the container width */
+}
 
+/* Toggler button on the right */
+.navbar-toggler {
+    position: absolute; /* Position it absolutely within the navbar */
+    right: 15px; /* Adjust as needed */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust vertical centering */
+    margin: 0; /* Remove any default margin */
+}
 
-            .offcanvas-body {
-                padding: 1rem; 
-            }
+}
 
-            .offcanvas-body .nav-link {
-                font-size: 1.25rem; 
-                padding: 1rem 0; 
-                position: relative;
-                right: 10px;
-                text-align: center;
-                
-            }
-            .nav-link i {
-                position: relative;
-                right: 21px;
-                left: auto;
-                right: auto;
-            }
-            .nav-link span{
-                position: relative;
-                right: 20px; 
-                left: auto;
-            }
-            .offcanvas-body .nav-item {
-                margin: 0; 
-            }
-            .navbar-toggler {
-                    position: relative;
-                    right: 10px;
-                    bottom: 15px;
-            }
-
-            .navbar-brand img {
-                    /* max-height: 90px;  */
-                    height: 210px;
-                    width: 240px;
-                    position: relative;
-                    bottom: 15px;
-                    left: auto;
-            }
-            .nav-item span{
-                position: relative;
-                left: 2px;
-            }
-            .navbar{
-                height: 100px;
-            }
-        }
     </style>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light custom-navbar navbar-dark" style="background-color: #D4D4D4;">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand">
                     <img src="{{ asset('images/logo polos 2.png') }}" alt="Logo Anda">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
+        
                 <!-- Sidebar for mobile -->
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
@@ -249,40 +228,36 @@
                                 <a class="nav-link" href="{{ url('/') }}">Home</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/about') }}">About</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/gallery') }}">Gallery</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/service')}}">Service</a>
                             </li>
+                            <div class="profile">
                             @guest
                                 @if (Route::has('login'))
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}"><i class="fa-regular fa-user" style="position: relative; left:140px;"></i> <span>Masuk</span></a>
+                                        <a class="nav-link" href="{{ route('login') }}"><i class="fa-regular fa-user"></i> <span>Masuk</span></a>
                                     </li>
                                 @endif
                             @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa-regular fa-user"></i>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('profile') }}">
+                                        <i class="fa-solid fa-user" style="margin-right: 8px;"></i>
+                                        {{ Auth::user()->name }}
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" >
-                                        <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
                                 </li>
                             @endguest
+                        </div>
                         </ul>
                     </div>
                 </div>
             </div>
         </nav>
+        
         
         <main>
             @yield('content')
@@ -313,6 +288,9 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/b604af375e.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>

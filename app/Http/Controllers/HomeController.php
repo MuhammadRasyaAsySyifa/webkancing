@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Gallery;
 use App\Models\Jasa;
 use Illuminate\Http\Request;
+use App\Models\Promo;
+
 
 class HomeController extends Controller
 {
@@ -12,7 +14,8 @@ class HomeController extends Controller
         $jasas = Jasa::all();
         $jasa = Jasa::first();
         $galleries = Gallery::all();
-        return view('home.home', compact('jasas','galleries','jasa'));
+        $promos = Promo::all();
+        return view('home.home', compact('jasas','galleries','jasa','promos'));
     }
 
     public function homemanage(){

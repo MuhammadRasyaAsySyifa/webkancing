@@ -69,20 +69,22 @@
 /* CSS */
 .navbar-brand img {
     max-height: 110px; /* Sesuaikan ukuran yang diinginkan */
-    position: relative; left: 35%;
+    position: relative; left: 40%;
+    margin-right: 30px;
 }
-
 .navbar {
     height: 70px; /* Tinggi navbar konstan */
 }
 
-
+.profile{
+    position: relative;left:150px;
+}
             .nav-item .nav-link{
                 color: black !important;
                 font-weight: 500;
                 font-size: 110%;
                 position: relative;
-                right: 90px;
+                right: 70px;
             }
             .nav-item span {
                 position: relative;
@@ -97,9 +99,8 @@
             }
             .nav-item.dropdown a.nav-link  {
             position: relative;
-            left: 40px; /* Sesuaikan nilai ini dengan yang diinginkan */
+            left: 40px;
             }
-
             @media (max-width: 767.98px) {
             .offcanvas-end {
             width: 190px !important; 
@@ -124,9 +125,8 @@
                 left: auto;
                 right: auto;
             }
-            .nav-link span{
+            .profile{
                 position: relative;
-                right: 20px; 
                 left: auto;
             }
             .offcanvas-body .nav-item {
@@ -139,8 +139,9 @@
             }
 
             .navbar-brand img {
-                    max-height: 90px; 
-                    width: 170px;
+                    /* max-height: 90px;  */
+                    height: 210px;
+                    width: 240px;
                     position: relative;
                     bottom: 15px;
                     left: auto;
@@ -148,6 +149,9 @@
             .nav-item span{
                 position: relative;
                 left: 2px;
+            }
+            .navbar{
+                height: 100px;
             }
 
 .content-container {
@@ -223,63 +227,51 @@
         <nav class="navbar navbar-expand-lg navbar-light custom-navbar navbar-dark" style="background-color: #D4D4D4;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/logo polos 2.png') }}" alt="Logo Anda" >
+                    <img src="{{ asset('images/logo polos 2.png') }}" alt="Logo Anda">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
         
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto" style="position: relative; left: 26%;">
-                        <li class="nav-item">
-                            <p><a class="nav-link" href="{{ url('/') }}">Home</a></p>
-                        </li>
-                        <li class="nav-item">
-                            <p><a class="nav-link" href="{{ url('/gallery') }}">Gallery</a></p>
-                        </li>
-                        <li class="nav-item">
-                            <p><a class="nav-link" href="{{ url('/service')}}">Service</a></p>
-                        </li>
-                    </ul>
-        
-                    
-                    <!-- Right Side Of Navbar -->
-                    <div class="" style="position: relative; right:125px">
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-icon" href="{{ route('login') }}"><i class="fa-regular fa-user"></i></a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="fa-regular fa-user"></i>
-                                </a>
-                                
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="text-align: center">
-                                    <a class="dropdown-item" href="{{ route('profile') }}"> Profile </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-        
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                <!-- Sidebar for mobile -->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/') }}">Home</a>
                             </li>
-                        @endguest
-                    </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/gallery') }}">Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/service')}}">Service</a>
+                            </li>
+                            <div class="profile">
+                            @guest
+                                @if (Route::has('login'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('login') }}"><i class="fa-regular fa-user" style="position: relative; left:140px;"></i> <span>Masuk</span></a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('profile') }}">
+                                        <i class="fa-solid fa-user" style="margin-right: 8px;"></i>
+                                        {{ Auth::user()->name }}
+                                    </a>
+                                </li>
+                            @endguest
+                        </div>
+                        </ul>
                     </div>
                 </div>
             </div>
         </nav>
-        
+
         <main>
             @yield('content')
         </main>

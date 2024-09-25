@@ -1,3 +1,4 @@
+{{-- adminmanage.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
@@ -13,8 +14,14 @@
     .table-container {
         overflow-x: auto;
     }
-    .container {
-        margin-top: 20px;
+  
+    .no-results {
+        color: red;
+        font-weight: bold;
+    }
+    .form-group select{
+        width: 210px;
+        margin-bottom: 10px;
     }
 </style>
 
@@ -32,11 +39,30 @@
 
 <div class="container mt-2 mb-3">
     <div class="btn-group" role="group" aria-label="Basic example">
-        <a href="/manage" class="btn btn-outline-secondary">Kelola Gallery</a>
+        <div class="div mt-4" >
+        {{-- <a href="/manage" class="btn btn-outline-secondary">Kelola Gallery</a> --}}
         <a href="/servis" class="btn btn-outline-secondary">Kelola Servis</a>
-        <a href="/jadwal" class="btn btn-outline-secondary">Kelola Jadwal</a>
-        <a href="{{ route('exportpdf') }}" class="btn btn-outline-secondary">Unduh Data Pesanan Ke PDF</a>
+        {{-- <a href="/jadwal" class="btn btn-outline-secondary">Kelola Jadwal</a> --}}
+        <a href="/promo" class="btn btn-outline-secondary">Kelola Promo</a>
     </div>
+        <div class="div" style="margin-left:30px;">
+            <form action="{{ route('exportpdf') }}" method="GET">
+                <div class="form-group">
+                    <label for="month">Pilih bulan:</label>
+                    <select name="month" id="month" class="form-control">
+                        <option value="">Semua Bulan</option>
+                        @for ($i = 1; $i <= 12; $i++)
+                            <option value="{{ $i }}" {{ request('month') == $i ? 'selected' : '' }}>
+                                {{ \Carbon\Carbon::create()->month($i)->translatedFormat('F') }}
+                            </option>
+                        @endfor
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-outline-secondary">Unduh Data Pesanan Ke PDF</button>
+            </form>
+        </div>
+    </div>
+    
 </div>
 
 <div class="container">
@@ -45,12 +71,17 @@
     <!-- Search input field -->
     <input id="myInput" type="text" class="form-control mb-3" placeholder="Cari Kode Unik...">
 
+    <!-- Message for no results -->
+    <div id="noResults" class="no-results" style="display: none;">
+        Data yang Anda cari tidak ada
+    </div>
+
     <div class="table-container">
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nama</th>
+                    <th>Nama Pemesan</th>
                     <th>Telepon</th>
                     <th>Email</th>
                     <th>Instagram</th>
@@ -76,7 +107,7 @@
                     <td>{{ $order->unique_code }}</td>
                     <td>{{ \Carbon\Carbon::parse($order->date)->translatedFormat('l, d F Y') }}</td>
                     <td>{{ date('H:i', strtotime($order->time)) }}</td>
-                    <td>{{ $order->durasi}} menit</td>
+                    <td>{{ $order->durasi }} menit</td>
                     <td>Rp. {{ number_format($order->total_price, 0, ',', '.') }}</td>
                     <td>
                         @if($order->bukti_pembayaran)
@@ -111,9 +142,24 @@
     $(document).ready(function(){
         $("#myInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            var hasResults = false;
+
+            $("#myTable tr").each(function() {
+                var rowText = $(this).text().toLowerCase();
+                if (rowText.indexOf(value) > -1) {
+                    $(this).show();
+                    hasResults = true;
+                } else {
+                    $(this).hide();
+                }
             });
+
+            // Show or hide the "no results" message
+            if (hasResults) {
+                $("#noResults").hide();
+            } else {
+                $("#noResults").show();
+            }
         });
     });
 

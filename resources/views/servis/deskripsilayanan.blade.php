@@ -1,4 +1,4 @@
-@extends('layouts.servis')
+@extends('layouts.app')
 
 @section('content')
 <div class="background-container">
@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-5 text-center">
                             <!-- Image Display -->
-                            <img src="{{ asset('images/' . $jasa->gambar) }}" alt="{{ $jasa->nama }}" class="img-fluid" style="border-radius: 20px; max-width: 100%; height: auto; position:relative; right:250px;">
+                            <img src="{{ asset('storage/images/' . $jasa->gambar) }}" alt="{{ $jasa->nama }}"  class="img-fluid" style="border-radius: 20px; max-width: 100%; height: auto; position:relative; right:250px;">
                         </div>
 
                         <div class="col-md-7">
@@ -57,6 +57,9 @@
 </div>
 
 <style>
+    body{
+        background: #d4d4d4;
+    }
     .hero-section {
         background-color: rgba(0, 0, 0, 0.6);
         background-blend-mode: overlay;
@@ -85,6 +88,13 @@
 
     .btn-primary:hover {
         background-color: #535353;
+    }
+    .col-md-5 img{
+        position: relative;
+        left: 5px;
+    }
+    .card-body{
+        background: #ebebeb;
     }
 </style>
 @endsection

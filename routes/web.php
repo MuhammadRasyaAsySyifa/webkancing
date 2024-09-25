@@ -7,6 +7,13 @@ use App\Http\Controllers\JasaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JadwalController;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Str;     
+use App\Http\Controllers\PromoController;
+
 
 
 
@@ -33,6 +40,10 @@ use App\Http\Controllers\JadwalController;
 // Route::get('/gallery/tampilkan/{id}', [App\Http\Controllers\HomeController::class, 'showImage'])->name('gallery.tampilkan');
 // Route::get('/manage', [App\Http\Controllers\HomeController::class, 'manage'])->middleware('admin');
 
+//promo
+Route::resource('promo', PromoController::class);
+
+
 //gallery
 Route::resource('gallery', GalleryController::class);
 Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'gallery'])->name('gallery.gallery');
@@ -42,6 +53,9 @@ Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'
 Route::get('/editprofile', [App\Http\Controllers\ProfileController::class, 'editprofile'])->name('editprofile');
 Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'updateProfile'])->name('profile.update');
 
+Route::get('/about', function () {
+    return view('about.about');
+});
 
 //servis
 Route::get('/service', [App\Http\Controllers\JasaController::class, 'service'])->name('service');
@@ -61,6 +75,28 @@ Route::post('/toggle-status/{id}', [ProfileController::class, 'toggleStatus']);
 Route::post('/upload-bukti/{id}', [ProfileController::class, 'uploadBukti'])->name('upload-bukti');
 Route::get('/export-pdf', [ProfileController::class, 'exportPdf'])->name('exportpdf');
 
+//login dengan google
+Route::get('auth/google', function () {
+    return Socialite::driver('google')->redirect();
+})->name('google.login');
+
+Route::get('auth/google/callback', function () {
+    $googleUser = Socialite::driver('google')->stateless()->user();
+    
+    // Cek apakah pengguna sudah ada berdasarkan email
+    $user = User::firstOrCreate([
+        'email' => $googleUser->getEmail(),
+    ], [
+        'name' => $googleUser->getName(),
+        'google_id' => $googleUser->getId(),
+        'password' => Hash::make(Str::random(24)), // Hash password acak
+    ]);
+
+    // Login pengguna
+    Auth::login($user);
+
+    return redirect('/');
+});
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
 Route::get('/adminmanage',[App\Http\Controllers\ProfileController::class, 'admin'])->name('admin');

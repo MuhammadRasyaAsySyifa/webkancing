@@ -37,6 +37,7 @@ class JasaController extends Controller
             'harga' => 'required|numeric|min:0',
             'include' => 'nullable|string|max:255', // Validasi untuk include
             'penting' => 'nullable|string|max:255', // Validasi untuk penting
+            'durasi' => 'required|integer|min:1',
             'kategori' => 'nullable|string|max:255', // Validasi untuk penting
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk gambar
         ]);
@@ -49,17 +50,19 @@ class JasaController extends Controller
         $jasa->harga = $request->harga;
         $jasa->include = $request->include; // Simpan data include
         $jasa->penting = $request->penting; // Simpan data penting
-        $jasa->kategori = $request->penting; // Simpan data penting
+        $jasa->durasi = $request->durasi;
+        $jasa->kategori = $request->kategori; // Simpan data penting
 
     
-        // Simpan gambar
-        if ($request->hasFile('gambar')) {
-            $image = $request->file('gambar');
-            $jasa->saveImage($image);
-        }
-    
-        // Simpan data ke dalam database
-        $jasa->save();
+    // Simpan gambar
+    if ($request->hasFile('gambar')) {
+        $image = $request->file('gambar');
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('public/images', $filename);
+        $jasa->gambar = $filename; // Simpan nama file gambar
+    }
+
+    $jasa->save();
     
         // Redirect ke halaman indeks jasa dengan pesan sukses
         return redirect()->route('servis.index')->with('success', 'Jasa berhasil ditambahkan.');
@@ -99,6 +102,7 @@ class JasaController extends Controller
             'harga' => 'required|numeric|min:0',
             'include' => 'nullable|string',
             'penting' => 'nullable|string',
+            'durasi' => 'required|integer|min:1',
             'kategori' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // optional: validasi gambar
         ]);
@@ -113,6 +117,7 @@ class JasaController extends Controller
         $jasa->harga = $request->harga;
         $jasa->include = $request->include;
         $jasa->penting = $request->penting;
+        $jasa->durasi = $request->durasi;
         $jasa->kategori = $request->kategori;
 
     

@@ -100,14 +100,32 @@ public function uploadBukti(Request $request, $id)
 
     return redirect()->back()->with('error', 'Gagal mengunggah bukti pembayaran.');
 }
-    public function exportPdf()
-    {
-        Carbon::setLocale('id');
+public function exportPdf(Request $request)
+{
+    Carbon::setLocale('id');
+    
+    // Dapatkan bulan yang dipilih dari request
+    $month = $request->input('month');
+
+    // Filter pesanan berdasarkan bulan yang dipilih
+    if ($month) {
+        $orders = Order::whereMonth('date', $month)->get();
+        // Ambil nama bulan berdasarkan bulan yang dipilih
+        $monthName = \Carbon\Carbon::create()->month($month)->translatedFormat('F');
+    } else {
         $orders = Order::all();
-        $pdf = PDF::loadView('profile.orders-pdf', compact('orders'))
-                  ->setPaper('a4', 'portrait'); // Mengatur ukuran dan orientasi halaman
-        return $pdf->download('orders.pdf');
+        $monthName = 'Semua_Bulan';
     }
+
+    // Generate PDF menggunakan view 'profile.orders-pdf'
+    $pdf = PDF::loadView('profile.orders-pdf', compact('orders'))
+              ->setPaper('a4', 'portrait'); // Mengatur ukuran dan orientasi halaman
+
+    // Unduh file dengan nama sesuai bulan yang dipilih
+    return $pdf->download('orders_' . $monthName . '_' . \Carbon\Carbon::now()->year . '.pdf');
+}
+
+
 
         
 

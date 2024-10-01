@@ -33,7 +33,7 @@
                 <h4>Informasi Pesanan</h4>
                 <p><strong>Nama Jasa:</strong> {{ $order->nama_jasa }}</p>
                 <p><strong>Tanggal Pemesanan:</strong> {{ \Carbon\Carbon::parse($order->date)->translatedFormat('l, d F Y') }}</p>
-                <p><strong>Waktu:</strong> {{ date('H:i', strtotime($order->time)) }} <strong>Durasi:</strong> {{ $jadwal->durasi }} Menit</p>
+                <p><strong>Waktu:</strong> {{ date('H:i', strtotime($order->time)) }} <strong>Durasi:</strong> {{ $jasa->durasi }} Menit</p>
                 <p><strong>Total Harga:</strong> Rp. {{ number_format($order->total_price, 0, ',', '.') }}</p>
             </div>
 
@@ -51,7 +51,7 @@
                     <tbody>
                         <tr>
                             <td>{{ $order->nama_jasa }}</td>
-                            <td>{{ $jadwal->durasi }} Menit</td>
+                            <td>{{ $jasa->durasi }} Menit</td>
                             <td>Rp. {{ number_format($order->total_price, 0, ',', '.') }}</td>
                         </tr>
                     </tbody>
@@ -71,7 +71,7 @@
                 %0ANama%20Jasa:%20{{ $order->nama_jasa }}
                 %0AKode%20Unik:%20{{ $order->unique_code }}
                 %0ATanggal%20Booking:%20{{ \Carbon\Carbon::parse($order->date)->translatedFormat('l, d F Y') }}
-                %0AWaktu:%20{{ date('H:i', strtotime($order->time)) }}%20(Durasi:%20{{ $jadwal->durasi }}%20Menit)
+                %0AWaktu:%20{{ date('H:i', strtotime($order->time)) }}%20(Durasi:%20{{ $jasa->durasi }}%20Menit)
                 %0ATotal%20Harga:%20Rp.%20{{ number_format($order->total_price, 0, ',', '.') }}
                 %0A%0ANama%20Pemesan:%20{{ $order->name }}
                 %0ANomor%20Telepon:%20{{ $order->phone }}

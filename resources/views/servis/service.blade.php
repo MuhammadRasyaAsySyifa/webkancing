@@ -31,22 +31,37 @@
     </div>
 </div>
 
-<!-- Daftar Layanan -->
 <div class="container mt-5">
-    <div class="row jasa-container" >
+    <div class="row jasa-container">
         @foreach ($jasas as $jasa)
-        <div class="col-md-5 jasa-item" data-category="{{ $jasa->kategori }}">
-            <a href="/deskripsilayanan/{{ $jasa->id }}" style="display: block;">
-                <img src="{{ asset('storage/images/' . $jasa->gambar) }}" alt="{{ $jasa->nama }}"  style="max-width: 250px; height: 400px;">
-            </a>            <h4><a href="/deskripsilayanan/{{ $jasa->id }}">{{ $jasa->nama }}</a></h4>
-            <div>
-                <p> {{ $jasa->deskripsi }}</p>
+        <div class="col-md-3 col-sm-6 jasa-item" data-category="{{ $jasa->kategori }}">
+            <div class="card h-100 shadow-sm"> <!-- Card wrapper with shadow -->
+                <a href="/deskripsilayanan/{{ $jasa->id }}">
+                    <img src="{{ asset('storage/images/' . $jasa->gambar) }}" class="card-img-top" alt="{{ $jasa->nama }}" style="height: 300px; object-fit: cover;">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="/deskripsilayanan/{{ $jasa->id }}" class="text-dark" style="text-decoration: none;">
+                            {{ $jasa->nama }}
+                        </a>
+                    </h5>
+                    <p class="card-text">
+                        {{ Str::limit($jasa->deskripsi, 100) }} <!-- Membatasi teks deskripsi -->
+                    </p>
+                </div>
+                <div class="card-footer bg-white">
+                    <a href="/deskripsilayanan/{{ $jasa->id }}" class="btn btn-secondary w-100">
+                        Lihat Detail
+                    </a>
+                    <p class="text-muted mt-2">Rp. {{ number_format($jasa->harga, 0, ',', '.') }}</p>
+                </div>
             </div>
-            <a href="/deskripsilayanan/{{ $jasa->id }}" class="view-more" style="text-decoration: none; margin-top:8px;">Rp. {{ number_format($jasa->harga, 0, ',', '.') }}</a>
         </div>
         @endforeach
     </div>
 </div>
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -82,6 +97,7 @@ body{
 }
 
 .jasa-container {
+    font-family: 'Outfit';
     display: flex;
     flex-wrap: wrap; 
     justify-content: center; 
@@ -92,7 +108,7 @@ body{
     flex-direction: column;
     align-items: center !important; 
     text-align: center !important; 
-    margin-bottom: 60px; 
+    margin-bottom: 30px; 
     transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease; /* Smooth transition for visibility, opacity, and position */
     opacity: 1; /* Start fully visible */
     visibility: visible; /* Start visible */
@@ -119,7 +135,20 @@ body{
     text-align: center !important;
     margin: 0 auto;
 }
+.card{
+    background: #ededed !important;
+}
 
+
+.card-title a {
+    color: #333; /* Mengatur warna judul */
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.card-footer {
+    text-align: center;
+}
 /* Category Button Transitions */
 .btn-group {
     display: flex;
@@ -209,12 +238,12 @@ body{
             line-height: 1.5;
             /* text-align: left;  */
         }  
-        .col-md-5 img {
-            max-width: 60%;
-            height: 60%;
+        .col-md-3 img {
+            margin-top: 20px;
+            max-width: 80%;
+            height: 90%;
             object-fit: cover; /* Menjaga rasio aspek gambar */
             border-radius: 10px;
-            margin-bottom: 20px ; 
             width: 300px;
         }
         

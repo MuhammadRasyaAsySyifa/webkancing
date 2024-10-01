@@ -74,6 +74,7 @@ Route::resource('jadwal', JadwalController::class);
 Route::post('/toggle-status/{id}', [ProfileController::class, 'toggleStatus']);
 Route::post('/upload-bukti/{id}', [ProfileController::class, 'uploadBukti'])->name('upload-bukti');
 Route::get('/export-pdf', [ProfileController::class, 'exportPdf'])->name('exportpdf');
+Route::get('/export-excel', [ProfileController::class, 'exportExcel'])->name('exportexcel');
 
 //login dengan google
 Route::get('auth/google', function () {

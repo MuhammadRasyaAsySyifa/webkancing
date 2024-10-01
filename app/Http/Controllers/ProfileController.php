@@ -7,7 +7,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Jadwal;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OrdersExport;
 
 use Illuminate\Http\Request;
 
@@ -124,9 +125,13 @@ public function exportPdf(Request $request)
     // Unduh file dengan nama sesuai bulan yang dipilih
     return $pdf->download('orders_' . $monthName . '_' . \Carbon\Carbon::now()->year . '.pdf');
 }
+public function exportExcel(Request $request)
+{
+    $month = $request->input('month');
 
+    // Ambil nama bulan untuk penamaan file
+    $monthName = $month ? \Carbon\Carbon::create()->month($month)->translatedFormat('F') : 'Semua_Bulan';
 
-
-        
-
+    return Excel::download(new OrdersExport($month), 'orders_' . $monthName . '_' . \Carbon\Carbon::now()->year . '.xlsx');
+}
 }

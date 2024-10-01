@@ -123,11 +123,14 @@
                             <div class="col-md-6">
                                 <select id="kategori" class="form-select @error('kategori') is-invalid @enderror" name="kategori">
                                     <option value="" {{ $jasa->kategori == '' ? 'selected' : '' }}>Pilih Kategori</option>
-                                    <option value="Self Foto Studio" {{ $jasa->kategori == 'Self Foto Studio' ? 'selected' : '' }}>Self Foto Studio</option>
-                                    <option value="Foto Studio" {{ $jasa->kategori == 'Foto Studio' ? 'selected' : '' }}>Foto Studio</option>
-                                    <option value="Foto Strip" {{ $jasa->kategori == 'Foto Strip' ? 'selected' : '' }}>Foto Strip</option>
+                                    <option value="Self Photo Studio" {{ $jasa->kategori == 'Self Photo Studio' ? 'selected' : '' }}>Self Foto Studio</option>
+                                    <option value="Photo Studio" {{ $jasa->kategori == 'Photo Studio' ? 'selected' : '' }}>Foto Studio</option>
+                                    <option value="Photo Strip" {{ $jasa->kategori == 'Photo Strip' ? 'selected' : '' }}>Foto Strip</option>
                                     <option value="Polaroid" {{ $jasa->kategori == 'Polaroid' ? 'selected' : '' }}>Polaroid</option>
+                                    <option value="other" {{ $jasa->kategori == 'other' ? 'selected' : '' }}>Lainnya</option>
                                 </select>
+                        
+                                <input type="text" id="kategori_lainnya" class="form-control mt-2 @error('kategori') is-invalid @enderror" placeholder="Masukkan kategori lain" style="display: none;" value="{{ old('kategori_lainnya', $jasa->kategori == 'other' ? $jasa->kategori_lainnya : '') }}">
                         
                                 @error('kategori')
                                     <span class="invalid-feedback" role="alert">
@@ -164,4 +167,28 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const kategoriSelect = document.getElementById('kategori');
+    const kategoriLainnyaInput = document.getElementById('kategori_lainnya');
+    const form = kategoriSelect.closest('form');
+
+    kategoriSelect.addEventListener('change', function () {
+        if (kategoriSelect.value === 'other') {
+            kategoriLainnyaInput.style.display = 'block';
+            kategoriLainnyaInput.setAttribute('name', 'kategori'); // Set input name to 'kategori'
+        } else {
+            kategoriLainnyaInput.style.display = 'none';
+            kategoriLainnyaInput.removeAttribute('name'); // Remove name attribute when not needed
+        }
+    });
+
+    // Show the input if "other" is pre-selected (for example during form validation)
+    if (kategoriSelect.value === 'other') {
+        kategoriLainnyaInput.style.display = 'block';
+        kategoriLainnyaInput.setAttribute('name', 'kategori'); // Ensure the name is set if "other" is selected on page load
+    }
+});
+
+</script>
 @endsection

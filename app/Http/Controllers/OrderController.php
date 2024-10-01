@@ -71,6 +71,7 @@ class OrderController extends Controller
     $request->request->add([
         'status' => 'Unpaid',
         'jasa_id' => session('booking_data')['jasa_id'] ?? null, // Ambil dari session atau atur nilainya
+        'durasi' => session('booking_data')['durasi'],
     ]);
 
     // Simpan pesanan ke database
@@ -89,12 +90,15 @@ class OrderController extends Controller
         'date' => 'required|date',
         'time' => 'required',
         'jasa_id' => 'required|integer',
+        'durasi'=> 'required',
     ]);
 
     // Ambil data
     $date = $validatedData['date'];
     $time = $validatedData['time'];
     $jasaId = $validatedData['jasa_id'];
+    $durasi = $validatedData['durasi'];
+
 
     // Periksa apakah tanggal dan slot waktu yang dipilih sudah dibooking
     $isAlreadyBooked = Order::where('jasa_id', $jasaId)
@@ -179,7 +183,8 @@ public function checkAvailability(Request $request)
 
     $order = Order::findOrFail($id);
     $jadwal = Jadwal::where('id_jasa', $order->jasa_id)->first(); 
-    return view('servis.invoice', compact('order','jadwal'));
+    $jasa = Jasa::find($order->jasa_id); // Misalnya mengambil jasa berdasarkan id
+    return view('servis.invoice', compact('order','jadwal','jasa'));
 }
 
 }

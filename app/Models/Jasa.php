@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Jasa extends Model
 {
     protected $fillable = [
-        'nama', 'deskripsi', 'harga', 'gambar','deskripsilayanan','include','penting','kategori'
+        'nama', 'deskripsi', 'harga', 'gambar','deskripsilayanan','include','penting','kategori','durasi'
     ];
     public function jadwals()
     {

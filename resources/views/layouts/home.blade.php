@@ -450,7 +450,7 @@ iframe{
                                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.2196474109287!2d114.58740531068628!3d-3.295711941110598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de4211bbc1be42d%3A0xd93490f4e3d79a8e!2sSMK%20Negeri%202%20Banjarmasin!5e0!3m2!1sid!2sid!4v1725170568188!5m2!1sid!2sid" width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                                 <div class="contact-info ml-4">
-                                    <h4 style="cursor:pointer;" onclick="toggleMap()">
+                                    <h4>
                                         <i class="fas fa-map-marker-alt">&nbsp;</i>Lokasi Kami
                                     </h4>
                                     <p>Jl. Brig Jend. Hasan Basri No.6,<br> Sungai Miai, Kec. Banjarmasin Utara,<br>Kota Banjarmasin, Kalimantan Selatan 70124</p>

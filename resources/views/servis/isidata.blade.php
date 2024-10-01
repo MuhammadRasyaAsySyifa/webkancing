@@ -135,7 +135,7 @@
                             <div class="card card-body">
                                 <strong>{{ $jasa->nama }}</strong>
                                 <p><strong>Tanggal:</strong> {{ date('j F Y', strtotime(session('booking_data')['date'])) }} {{ session('booking_data')['time'] }} WITA</p>
-                                <p><strong>Durasi:</strong>  {{ $jasa->durasi }} menit</p>
+                                <p><strong>Durasi:</strong> {{ $durasi }} Menit</p>
                                 <p><strong>Harga:</strong> Rp. {{ number_format($jasa->harga, 0, ',', '.') }}</p>
                             </div>
                         </div>
